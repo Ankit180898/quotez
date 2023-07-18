@@ -40,6 +40,7 @@ dependencies:
   get:
   http:
   flutter_dotenv:
+  flutter_swiper_plus:
 
 dev_dependencies:
   flutter_test:
