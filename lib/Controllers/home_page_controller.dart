@@ -10,9 +10,10 @@ import 'package:quotez/Models/random_quote_model.dart';
 class HomePageController extends GetxController{
   @override
   void onInit() {
-    super.onInit();
     getCategories();
     getQuoteFromCategory();
+    super.onInit();
+
   }
 
   final tabsData = <String>[].obs;
