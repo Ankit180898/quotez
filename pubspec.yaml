@@ -40,7 +40,9 @@ dependencies:
   get:
   http:
   flutter_dotenv:
-  flutter_swiper_plus:
+  flutter_card_swipper:
+  share:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

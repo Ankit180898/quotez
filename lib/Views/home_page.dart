@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 import 'package:get/get.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:share/share.dart';
+import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 class HomePage extends StatefulWidget {
    HomePage({super.key});
 
@@ -10,143 +11,119 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   var controller=Get.put(HomePageController());
 
-   void handleSwipeAction(int index) {
-     final item = controller.randomQuoteList[index];
-     // You can perform any action based on the swipe direction or item data here
-     print('Swiped ${item.author} ${index == 0 ? "right" : "left"}');
-   }
+  int current = 0;
+
+
 
   @override
   Widget build(BuildContext context) {
+     print("len:${controller.tabsData.length}");
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.teal,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+        backgroundColor: Color(0xff191922),
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Obx(()=>
+            Stack(
               children: [
-                Row(
-                  children: [
-                    InkWell(onTap: (){
-                      controller.getCategories();
-                    },child: Icon(Icons.category,size: 20,))
-                  ],
-                ),
-                const SizedBox(height: 20,),
-                // Container(
-                //   height: 300,
-                //   child: Obx(()=>
-                //       Swiper(
-                //         itemCount: controller.randomQuoteList.length,
-                //         itemBuilder: (context, index) {
-                //           var i=controller.randomQuoteList[index];
-                //           return Card(
-                //
-                //             // Build your card UI with item data
-                //             child: Column(
-                //               children: [
-                //                  Text("${i.author}"),
-                //                Text("${i.text}"),
-                //               ],
-                //
-                //
-                //             ),
-                //           );
-                //         },
-                //         loop: false,
-                //         onIndexChanged: (index) {
-                //           handleSwipeAction(index);
-                //           // Handle swipe left or right action here
-                //         },
-                //       ),
-                //   )
-                //   ),
-                Obx(()=>
-                   ListView.builder(
-                  itemCount: controller.randomQuoteList.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    var i=controller.randomQuoteList[index];
-                    return  Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Container(
-                        height: 200,
-                        child: Card(
-                          // Define the shape of the card
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          elevation: 20,
+                Center(
+                  child: Container(
 
-                          // Define how the card's content should be clipped
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          // Define the child widget of the card
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              // Add padding around the row widget
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    // Add an image widget to display an image
-                                    Image.network(
-                                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3fvR2JwcxPaBzR6CA0__Xlwom2o03z-8uqgezbdsrRA&s",
-                                      height: 100,
-                                      width: 100,
-                                      fit: BoxFit.cover,
+                    child:
+
+                         Swiper(
+                                layout: SwiperLayout.TINDER,
+                                customLayoutOption: new CustomLayoutOption(
+                                    startIndex: -1,
+                                    stateCount: 3
+                                ).addRotate([
+                                  -45.0/180,
+                                  0.0,
+                                  45.0/180
+                                ]).addTranslate([
+                                  new Offset(-370.0, -40.0),
+                                  new Offset(0.0, 0.0),
+                                  new Offset(370.0, -40.0)
+                                ]),
+                                itemWidth: 600,
+                                itemHeight: 500,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: 300,
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3), // changes position of shadow
+                                        ),
+                                      ],
+                                      color: Colors.white,
                                     ),
-                                    // Add some spacing between the image and the text
-                                    // Add an expanded widget to take up the remaining horizontal space
-                                    Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15.0),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          // Add some spacing between the top of the card and the title
-                                          Container(height: 5),
-                                          // Add a title widget
-                                          Text(
-                                            "${i.text}",
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                            Text("Quotes",style: TextStyle(fontSize: 20.0, // Adjust the font size as needed
+                                              fontWeight: FontWeight.bold,),),
+                                            IconButton(onPressed: () {
+                                              Share.share("${controller.randomQuoteList[index].text}");
+                                            }, icon: const Icon(Icons.share),color: Colors.red,
+
+
+                                            )
+                                            ],
                                           ),
-                                          // Add some spacing between the title and the subtitle
-                                          Container(height: 5),
-                                          // Add a subtitle widget
+                                          Spacer(),
                                           Text(
-                                            "${i.author}",
+                                            "${controller.randomQuoteList[index].text}",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 40.0,
+                                              // Adjust the font size as needed
+                                              fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                                            ),
+                                            maxLines: 5,
                                           ),
-                                          // Add some spacing between the subtitle and the text
-                                          // Add a text widget to display some text
-                                          Text(
-                                            "adsdsa",
-                                            maxLines: 2,
+                                          Spacer(),
+
+                                          Divider(color: Colors.grey,thickness: 5, indent: 100,
+                                            endIndent: 100,),
+                                          Spacer(),
+
+                                          Center(
+                                            child: Text("${controller.randomQuoteList[index].author}",style:TextStyle(fontSize: 15.0, // Adjust the font size as needed
+                                              fontWeight: FontWeight.bold,color: Colors.blueGrey),),
                                           ),
+                                          Spacer(),
+
                                         ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ],),
-                        ),
-                      ),
-                    );}
+                                  );
+                                },
+
+                                itemCount: controller.randomQuoteList.length),
+
+                    )
                   ),
-                ),
-
-
+                Center(child: controller.isLoading.value==true?CircularProgressIndicator():SizedBox())
               ],
             ),
           ),
+          ),
+
         ),
-      ),
+
     );
   }
 }

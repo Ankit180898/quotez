@@ -15,8 +15,8 @@ class HomePageController extends GetxController{
     getQuoteFromCategory();
   }
 
-  var catList=<RandomQuoteModel>[].obs;
-
+  final tabsData = <String>[].obs;
+  var isLoading=false.obs;
 
   // var subCategoryList = <SubCategoryModel>[].obs;
 
@@ -38,26 +38,18 @@ class HomePageController extends GetxController{
       http.Response response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         final json = jsonDecode(response.body);
-        print("data $json");
+        print("cat $json");
         for(var i in json){
-          catList.add(i);
+          tabsData.add(i);
         }
-        print("list: $catList");
+        print("list: $tabsData");
       }
       else {
         throw jsonDecode(response.body)["message"] ?? "Unknown Error Occurred";
       }
     } catch (error) {
       // refreshToken();
-      showDialog(
-          context: Get.context!,
-          builder: (context) {
-            return SimpleDialog(
-              title: Text("Error"),
-              contentPadding: EdgeInsets.all(20),
-              children: [Text(error.toString())],
-            );
-          });
+
     }
   }
 
@@ -66,6 +58,7 @@ class HomePageController extends GetxController{
     var apiKey = dotenv.env['API_KEY'];
     // final accessToken=prefs.getString("accessToken");
     // subCategoryList.clear();
+    isLoading.value=true;
     randomQuoteList.clear();
     var headers = {
       "content-type": "application/json",
@@ -74,12 +67,13 @@ class HomePageController extends GetxController{
     };
     try {
       var url = Uri.parse(
-          "https://famous-quotes4.p.rapidapi.com/random?category=all&count=4");
+          "https://famous-quotes4.p.rapidapi.com/random?category=all&count=10");
       // var url=Uri.parse(ApiEndpoints.baseUrl + ApiEndpoints.categoriesEndPoints.categories);
       print("call Url -> :: $url");
       // print("token -> ::$accessToken");
       http.Response response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
+        isLoading.value=false;
         final json = jsonDecode(response.body);
         print("data $json");
        if(json is Iterable){
@@ -89,6 +83,8 @@ class HomePageController extends GetxController{
        }
         print("my data: ${randomQuoteList.length}");
 
+      }else {
+        throw "Unknown Error Occurred";
       }
     } catch (error) {
       // refreshToken();
@@ -103,6 +99,9 @@ class HomePageController extends GetxController{
           });
     }
   }
+
+
+
 
 
 
