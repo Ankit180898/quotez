@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
+import 'Controllers/internet_controller.dart';
+import 'Services/api_service.dart';
 import 'Views/home_page.dart';
 
 Future main() async{
@@ -21,6 +24,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      initialBinding: BindingsBuilder(() {
+        Get.put(InternetController(), permanent: true);
+        Get.put(ApiService(), permanent: true);
+      }),
       home:  HomePage(),
     );
   }
