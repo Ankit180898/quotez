@@ -44,6 +44,9 @@ dependencies:
   google_fonts:
   card_swiper:
   connectivity_plus:
+  sqflite:
+  path:
+  flutter_staggered_grid_view:
 
 dev_dependencies:
   flutter_test:

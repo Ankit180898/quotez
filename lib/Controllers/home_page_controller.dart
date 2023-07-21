@@ -7,7 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:quotez/Models/random_quote_model.dart';
+import 'package:quotez/Services/database_helper.dart';
+import 'package:quotez/Services/extension_method.dart';
 
+import '../Models/saved_item_model.dart';
 import '../Services/api_service.dart';
 class HomePageController extends GetxController{
   final ApiService _apiService = Get.find<ApiService>();
@@ -16,9 +19,11 @@ class HomePageController extends GetxController{
   void onInit() {
     getCategories();
     getQuoteFromCategory("all");
+fetchDataFromDatabase();
     super.onInit();
 
   }
+  final DatabaseHelper dbHelper = DatabaseHelper();
 
   final tabsData = <String>[].obs;
   var isLoading=false.obs;
@@ -59,6 +64,8 @@ class HomePageController extends GetxController{
 
 
   var randomQuoteList=<RandomQuoteModel>[].obs;
+  var savedItemsList = <RandomQuoteModel>[].obs;
+
   Future<void> getQuoteFromCategory(String cat) async {
     try {
     var apiKey = dotenv.env['API_KEY'];
@@ -85,6 +92,7 @@ class HomePageController extends GetxController{
            randomQuoteList.add(RandomQuoteModel.fromJson(i));
          }
        }
+
         print("my data: ${randomQuoteList.length}");
 
     } catch (error) {
@@ -120,6 +128,26 @@ void adFalse(){
        getQuoteFromCategory(selectedCategory.value);
     }
   }
+
+  void saveItemToDatabase(RandomQuoteModel item) async {
+    Item databaseItem = Item(text: item.text!, author:item.author!,category: item.category!);
+    await dbHelper.insertItem(databaseItem);
+    fetchDataFromDatabase(); // Refresh the list after saving
+  }
+
+  Future<void> fetchDataFromDatabase() async {
+  print("somethinhg");
+    List<Item> databaseItems = await dbHelper.getItems();
+    print('Number of Items in Database: ${databaseItems.length}');
+    List<RandomQuoteModel> savedItems = databaseItems.map((item) {
+      return RandomQuoteModel(text: item.text, author: item.author, category: item.category); // Replace 'Some Category' with the actual category
+    }).toList();
+
+    savedItemsList.assignAll(savedItems);
+  }
+
+
+
 
 
 

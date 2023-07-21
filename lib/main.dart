@@ -5,7 +5,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'Controllers/internet_controller.dart';
 import 'Services/api_service.dart';
-import 'Views/home_page.dart';
+import 'Views/Widgets/bottom_nav.dart';
 
 Future main() async{
   await dotenv.dotenv.load(fileName:".env");
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         Get.put(InternetController(), permanent: true);
         Get.put(ApiService(), permanent: true);
       }),
-      home:  HomePage(),
+      home:  BottomNav(),
     );
   }
 }
