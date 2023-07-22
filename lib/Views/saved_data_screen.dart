@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../Controllers/home_page_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -24,6 +25,15 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text("Liked",style: GoogleFonts.openSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
+          elevation: 0,
+          flexibleSpace:Container(
+            decoration: const BoxDecoration(
+                color: Color(0xFF4051A9)
+            ),
+          ),
+        ),
         body: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -37,26 +47,28 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                   child: Text('No items in the database.'),
                 );
               } else {
-                return MasonryGridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 12,
-                  itemCount: controller.savedItemsList.length,
-                  itemBuilder: (context, index) {
-                    final item = controller.savedItemsList[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.all(
-                              Radius.circular(15))
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(15)),
-                        child: Text("${item.text}"),
-                      ),
-                    );
-                  },
+                return Padding(
+                  padding: const EdgeInsets.only(left: 15.0,right: 15.0,top: 15.0),
+                  child: MasonryGridView.count(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 12,
+                    itemCount: controller.savedItemsList.length,
+                    itemBuilder: (context, index) {
+                      final item = controller.savedItemsList[index];
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(15))
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Center(child: Text("${item.text}",style: GoogleFonts.openSans(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black),)),
+                        ),
+                      );
+                    },
+                  ),
                 );
                 // return ListView.builder(
                 //     itemCount: controller.savedItemsList.length,
