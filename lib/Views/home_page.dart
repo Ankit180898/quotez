@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage>  {
           ),
             ),
             actions: [
-              IconButton(icon: Icon(Icons.light_mode),onPressed: (){
+              IconButton(icon: themeController.isDarkMode.isTrue?Icon(Icons.light_mode):Icon(Icons.dark_mode),onPressed: (){
                 themeController.toggleTheme();
               },)
             ],
