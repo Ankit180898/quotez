@@ -88,10 +88,7 @@ class _HomePageState extends State<HomePage>  {
                                               final item = controller.randomQuoteList[index];
                                               return InkWell(
                                                 onTap: (){
-                                                  // Save the selected item to the database
-                                                  controller.saveItemToDatabase(item);
-                                                  // Show a message or trigger any other action after saving
-                                                  Get.snackbar('Success', 'Item saved to database.');
+
                                                 },
                                                 child: Container(
                                                   height: 300,
@@ -193,6 +190,14 @@ class _HomePageState extends State<HomePage>  {
                                                               GoogleFonts.openSans(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blueGrey)
                                                           ),
                                                         ),
+                                                        Spacer(),
+                                                        IconButton(onPressed: () {
+                                                          // Save the selected item to the database
+                                                          controller.saveItemToDatabase(item);
+                                                          // Show a message or trigger any other action after saving
+                                                          Get.snackbar('Success', 'Item saved to database.');
+                                                        }, icon:Icon(Icons.bookmark),iconSize: 40,color:themeController.isDarkMode.isFalse?Colors.black:Colors.black,),
+
                                                         Spacer(),
 
                                                       ],

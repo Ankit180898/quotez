@@ -54,4 +54,9 @@ class DatabaseHelper {
       return Item.fromMap(maps[index]);
     });
   }
+
+  Future<void> removeItem(String item) async {
+    final db = await database;
+    await db.delete('items', where: 'author = ?', whereArgs: [item]);
+  }
 }

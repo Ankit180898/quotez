@@ -134,6 +134,10 @@ void adFalse(){
     await dbHelper.insertItem(databaseItem);
     fetchDataFromDatabase(); // Refresh the list after saving
   }
+  void removeItemFromDatabase(String item) async {
+    await dbHelper.removeItem(item);
+    fetchDataFromDatabase(); // Refresh the saved items list after removal
+  }
 
   Future<void> fetchDataFromDatabase() async {
   print("somethinhg");
@@ -145,6 +149,7 @@ void adFalse(){
 
     savedItemsList.assignAll(savedItems);
   }
+
 
 
 

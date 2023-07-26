@@ -51,7 +51,14 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
             child: Obx(() {
               if (controller.savedItemsList.isEmpty) {
                 return Center(
-                  child: Text('No items in the database.'),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.network("https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"),
+                      SizedBox(height: 30,),
+                      Text("No items to show",style:GoogleFonts.poppins(fontSize: 20,color: Colors.white),)
+                    ],
+                  ),
                 );
               } else {
                 return Padding(
@@ -63,16 +70,33 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                     itemCount: controller.savedItemsList.length,
                     itemBuilder: (context, index) {
                       final item = controller.savedItemsList[index];
-                      return Container(
-                        decoration: BoxDecoration(
-                            color: Colors.amber,
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(15))
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Center(child: Text("${item.text}",style: GoogleFonts.openSans(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black),)),
-                        ),
+                      return Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(15))
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(17.0),
+                              child: Center(child: Text("${item.text}",style: GoogleFonts.openSans(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black),)),
+                            ),
+                          ),
+                          Positioned(
+                            top:2,
+                            right:2,
+                            child: GestureDetector(
+                              onTap: (){
+                                controller.removeItemFromDatabase(item.author.toString());
+                              },
+                              child: Icon(
+                                Icons.close,
+                              ),
+                            ),
+                          ),
+
+                        ],
                       );
                     },
                   ),
