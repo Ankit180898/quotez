@@ -47,6 +47,7 @@ dependencies:
   sqflite:
   path:
   flutter_staggered_grid_view:
+  lottie:
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../Controllers/home_page_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../Controllers/theme_controller.dart';
+
 class SavedDataScreen extends StatefulWidget {
   const SavedDataScreen({super.key});
 
@@ -14,6 +16,8 @@ class SavedDataScreen extends StatefulWidget {
 class _SavedDataScreenState extends State<SavedDataScreen> {
 
   var controller = Get.find<HomePageController>();
+  var themeController=Get.find<ThemeController>();
+
 
   @override
   void initState() {
@@ -29,18 +33,21 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
           title: Text("Liked",style: GoogleFonts.openSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
           elevation: 0,
           flexibleSpace:Container(
-            decoration: const BoxDecoration(
-                color: Color(0xFF4051A9)
+            decoration:  BoxDecoration(
+                color: themeController.isDarkMode.isFalse?Color(0xFF4051A9):Colors.black12
             ),
           ),
         ),
         body: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    stops: const [0.1, 0.9])),
+              gradient:themeController.isDarkMode.isFalse? LinearGradient(
+                  colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: const [0.1, 0.9]):null,
+              color: themeController.isDarkMode.isTrue?Colors.black12:null,
+            ),
+
             child: Obx(() {
               if (controller.savedItemsList.isEmpty) {
                 return Center(

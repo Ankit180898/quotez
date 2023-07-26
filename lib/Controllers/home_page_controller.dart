@@ -18,7 +18,7 @@ class HomePageController extends GetxController{
   @override
   void onInit() {
     getCategories();
-    getQuoteFromCategory("all");
+    // getQuoteFromCategory("all");
 fetchDataFromDatabase();
     super.onInit();
 
