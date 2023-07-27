@@ -25,12 +25,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     ThemeData lightTheme = ThemeData(
+      useMaterial3: true,
       primaryColor: Colors.blue, // Replace with your preferred primary color
       accentColor: Colors.green, // Replace with your preferred accent color
       // Add more customizations as per your requirement for the light theme
     );
 
     ThemeData darkTheme = ThemeData(
+
+      useMaterial3: true,
       primaryColor: Colors.indigo, // Replace with your preferred primary color for dark theme
       accentColor: Colors.teal, // Replace with your preferred accent color for dark theme
       brightness: Brightness.dark,
