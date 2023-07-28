@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dotenv;
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-
 import 'Controllers/internet_controller.dart';
 import 'Controllers/theme_controller.dart';
 import 'Services/api_service.dart';
-import 'Views/Widgets/bottom_nav.dart';
+import 'Views/onbaording_screen.dart';
 
 Future main() async{
   await dotenv.dotenv.load(fileName:".env");
@@ -26,8 +24,7 @@ class MyApp extends StatelessWidget {
 
     ThemeData lightTheme = ThemeData(
       useMaterial3: true,
-      primaryColor: Colors.blue, // Replace with your preferred primary color
-      accentColor: Colors.green, // Replace with your preferred accent color
+      colorSchemeSeed: Colors.green,
       // Add more customizations as per your requirement for the light theme
     );
 
@@ -51,7 +48,7 @@ class MyApp extends StatelessWidget {
         Get.put(InternetController(), permanent: true);
         Get.put(ApiService(), permanent: true);
       }),
-      home:  BottomNav(),
+      home:  const OnBoardingScreen(),
     );
   }
 }

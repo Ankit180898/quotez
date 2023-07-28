@@ -47,7 +47,8 @@ dependencies:
   sqflite:
   path:
   flutter_staggered_grid_view:
-  lottie:
+  animate_do:
+  carousel_slider:
 
 dev_dependencies:
   flutter_test:
@@ -72,7 +73,6 @@ flutter:
   uses-material-design: true
   assets:
     - .env
-
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

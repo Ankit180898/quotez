@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quotez/Models/random_quote_model.dart';
-import 'package:quotez/Views/Widgets/loader_widget.dart';
 import 'package:share/share.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'dart:math' as math;
