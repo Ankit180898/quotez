@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
 
       useMaterial3: true,
       primaryColor: Colors.indigo, // Replace with your preferred primary color for dark theme
-      accentColor: Colors.teal, // Replace with your preferred accent color for dark theme
       brightness: Brightness.dark,
       // Add more customizations as per your requirement for the dark theme
     );
