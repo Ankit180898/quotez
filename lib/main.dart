@@ -5,10 +5,23 @@ import 'Controllers/internet_controller.dart';
 import 'Controllers/theme_controller.dart';
 import 'Services/api_service.dart';
 import 'Views/onbaording_screen.dart';
-
+import 'home'
 Future main() async{
   await dotenv.dotenv.load(fileName:".env");
   runApp( MyApp());
+}
+
+// Called when Doing Background Work initiated from Widget
+Future<void> backgroundCallback(Uri uri) async {
+  if (uri.host == 'updatecounter') {
+    int _counter;
+    await HomeWidget.getWidgetData<int>('_counter', defaultValue: 0).then((value) {
+      _counter = value;
+      _counter++;
+    });
+    await HomeWidget.saveWidgetData<int>('_counter', _counter);
+    await HomeWidget.updateWidget(name: 'AppWidgetProvider', iOSName: 'AppWidgetProvider');
+  }
 }
 
 class MyApp extends StatelessWidget {

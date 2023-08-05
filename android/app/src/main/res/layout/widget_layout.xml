@@ -1,24 +1,24 @@
-<LinearLayout android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    layout_height=""
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<FrameLayout
+    android:id="@+id/widget_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120dp"
+    android:layout_height="120dp">
 
-            <TextView
-                android:id="@+id/data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:textFontWeight="500"
-                android:textColor="@android:color/background_light"
-                android:text="Quote"/>
-    <TextView
-        android:id="@+id/textview1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:textFontWeight="500"
-        android:textColor="@android:color/background_light"
-        android:text="Quote"/>
+        android:layout_height="match_parent"
+        android:background="#1f303d">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal"
+            android:padding="12dp"
+            android:text="--"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+</FrameLayout>
