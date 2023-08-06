@@ -5,7 +5,8 @@ import 'Controllers/internet_controller.dart';
 import 'Controllers/theme_controller.dart';
 import 'Services/api_service.dart';
 import 'Views/onbaording_screen.dart';
-import 'home'
+import 'package:home_widget/home_widget.dart';
+
 Future main() async{
   await dotenv.dotenv.load(fileName:".env");
   runApp( MyApp());
@@ -14,7 +15,7 @@ Future main() async{
 // Called when Doing Background Work initiated from Widget
 Future<void> backgroundCallback(Uri uri) async {
   if (uri.host == 'updatecounter') {
-    int _counter;
+    var _counter;
     await HomeWidget.getWidgetData<int>('_counter', defaultValue: 0).then((value) {
       _counter = value;
       _counter++;

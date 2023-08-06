@@ -10,7 +10,7 @@ import es.antonborri.home_widget.HomeWidgetLaunchIntent
 import es.antonborri.home_widget.HomeWidgetProvider
 
 class AppWidgetProvider : HomeWidgetProvider() {
-    override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray, widgetData: SharedPreferences) {
+    fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray, widgetData: SharedPreferences) {
         appWidgetIds.forEach { widgetId ->
             val views = RemoteViews(context.packageName, R.layout.widget_layout).apply {
 
@@ -29,12 +29,8 @@ class AppWidgetProvider : HomeWidgetProvider() {
 
                 setTextViewText(R.id.tv_counter, counterText)
 
-                // Pending intent to update counter on button click
-                val backgroundIntent = HomeWidgetBackgroundIntent.getBroadcast(context,
-                    Uri.parse("myAppWidget://updatecounter"))
-                setOnClickPendingIntent(R.id.bt_update, backgroundIntent)
             }
-            appWidgetManager.updateAppWidget(widgetId, views)
+
         }
     }
 }
