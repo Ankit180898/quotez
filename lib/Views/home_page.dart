@@ -84,9 +84,15 @@ class _HomePageState extends State<HomePage>  {
                                             layout: SwiperLayout.TINDER,
                                             itemBuilder: (context, index) {
                                               final item = controller.randomQuoteList[index];
+
                                               return InkWell(
                                                 onTap: (){
-                                                  Get.to(QuoteDisplayScreen(),arguments: ["${item.author}","${item.category}","${item.category}"]);
+                                                  print("item: ${item.text}");
+                                                  Get.to(QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
+                                                      {"second": item.text.toString()},
+                                                    {"third": item.category.toString()}
+                                                  ]
+                                                  );
                                                 },
                                                 child: Container(
                                                   height: MediaQuery.of(context).size.height * 0.30,

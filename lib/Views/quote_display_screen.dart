@@ -6,67 +6,91 @@ import 'package:share/share.dart';
 
 import '../Controllers/home_page_controller.dart';
 import '../Controllers/theme_controller.dart';
-class QuoteDisplayScreen extends StatelessWidget {
+class QuoteDisplayScreen extends StatefulWidget {
    QuoteDisplayScreen({super.key});
+
+  @override
+  State<QuoteDisplayScreen> createState() => _QuoteDisplayScreenState();
+}
+
+class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
   var controller=Get.find<HomePageController>();
+
   var themeController=Get.find<ThemeController>();
+
    var data = Get.arguments;
+   var quote,author,category;
+  @override
+  void initState() {
+    // TODO: implement initState
+    print("data: ${data[1]['second']}");
+    author="${data[0]['first']}";
+    quote="${data[1]['second']}";
+    category="${data[2]['third']}";
+    super.initState();
+  }
    @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Quotez",style: GoogleFonts.openSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
+        title: Text(category,style: GoogleFonts.openSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
         elevation: 0,
         flexibleSpace:Container(
           decoration:  BoxDecoration(
               color: themeController.isDarkMode.isFalse?Color(0xFF4051A9):Colors.black12
           ),
         ),
-        actions: [
-          IconButton(icon: themeController.isDarkMode.isTrue?Icon(Icons.light_mode):Icon(Icons.dark_mode),onPressed: (){
-            themeController.toggleTheme();
-          },)
-        ],
       ),
-      body: Column(
-        children: [
-          Text("Quotes",style:
-          GoogleFonts.openSans(fontSize: 20,fontWeight: FontWeight.bold,color: themeController.isDarkMode.isFalse?Colors.black:Colors.black),
-
-          ),
-          Text(
-            "${data[2]}",
-            textAlign: TextAlign.center,
-            style:GoogleFonts.poppins(
-              fontSize: 25.0,
-              color:themeController.isDarkMode.isFalse?Colors.black:Colors.black,
-              // Adjust the font size as needed
-              fontWeight: FontWeight.bold, // Adjust the font weight as needed
-            ),
-          ),
-          Row(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient:themeController.isDarkMode.isFalse? LinearGradient(
+              colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.1, 0.9]):null,
+          color: themeController.isDarkMode.isTrue?Colors.black12:null,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(onPressed: () {
-                Share.share("${data[2]}");
-              }, icon: const Icon(Icons.share),color: Colors.red,
+              Text(
+                quote.toString(),
+                textAlign: TextAlign.start,
+                style:GoogleFonts.poppins(
+                  fontSize: 25.0,
+                  color:themeController.isDarkMode.isFalse?Colors.black:Colors.white,
 
-
+                  // Adjust the font size as needed
+                  fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                ),
               ),
-              IconButton(onPressed: () async{
-                await Clipboard.setData( ClipboardData(text: data[2])).then((_) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Copied to your clipboard !')));
-                });
-
-              }, icon: const Icon(Icons.copy),color: Colors.red,
+              Row(
+                children: [
+                  IconButton(onPressed: () {
+                    Share.share("${data[2]}");
+                  }, icon: const Icon(Icons.share),color: Colors.red,
 
 
-              ),
+                  ),
+                  IconButton(onPressed: () async{
+                    await Clipboard.setData( ClipboardData(text: quote)).then((_) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Copied to your clipboard !')));
+                    });
 
+                  }, icon: const Icon(Icons.copy),color: Colors.red,
+
+
+                  ),
+
+                ],
+              )
             ],
-          )
-        ],
 
+          ),
+        ),
       ),
     );
   }
