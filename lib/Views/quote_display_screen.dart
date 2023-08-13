@@ -54,16 +54,27 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                quote.toString(),
-                textAlign: TextAlign.start,
-                style:GoogleFonts.poppins(
-                  fontSize: 25.0,
-                  color:themeController.isDarkMode.isFalse?Colors.black:Colors.white,
+              Container(
+                
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: themeController.isDarkMode.isFalse?Colors.black:Colors.white)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Text(
+                    quote.toString(),
+                    textAlign: TextAlign.start,
+                    style:GoogleFonts.poppins(
+                      fontSize: 25.0,
+                      color:themeController.isDarkMode.isFalse?Colors.black:Colors.white,
 
-                  // Adjust the font size as needed
-                  fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                      // Adjust the font size as needed
+                      fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                    ),
+                  ),
                 ),
               ),
               Row(
