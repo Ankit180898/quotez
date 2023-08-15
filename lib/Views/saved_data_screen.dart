@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quotez/Views/quote_display_screen.dart';
 import '../Controllers/home_page_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -72,15 +73,24 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                       final item = controller.savedItemsList[index];
                       return Stack(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(15))
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Center(child: Text("${item.text}",style: GoogleFonts.openSans(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black),)),
+                          InkWell(
+                            onTap: (){
+                              Get.to(QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
+                                {"second": item.text.toString()},
+                                {"third": item.category.toString()}
+                              ]
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(15))
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(17.0),
+                                child: Center(child: Text("${item.text}",style: GoogleFonts.openSans(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.black),)),
+                              ),
                             ),
                           ),
                           Positioned(
