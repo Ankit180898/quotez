@@ -62,19 +62,22 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(color: themeController.isDarkMode.isFalse?Colors.black:Colors.white)
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Text(
-                    quote.toString(),
-                    textAlign: TextAlign.start,
-                    style:GoogleFonts.poppins(
-                      fontSize: 25.0,
-                      color:themeController.isDarkMode.isFalse?Colors.black:Colors.white,
-
-                      // Adjust the font size as needed
-                      fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Text(
+                        quote.toString(),
+                        textAlign: TextAlign.start,
+                        style:GoogleFonts.poppins(
+                          fontSize: 25.0,
+                          color:themeController.isDarkMode.isFalse?Colors.white:Colors.white,
+                          // Adjust the font size as needed
+                          fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               Row(
@@ -82,7 +85,6 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                   IconButton(onPressed: () {
                     Share.share("${data[2]}");
                   }, icon: const Icon(Icons.share),color: Colors.red,
-
 
                   ),
                   IconButton(onPressed: () async{
