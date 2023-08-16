@@ -83,7 +83,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
               Row(
                 children: [
                   IconButton(onPressed: () {
-                    Share.share("${data[2]}");
+                    Share.share("$quote}");
                   }, icon: const Icon(Icons.share),color: Colors.red,
 
                   ),
