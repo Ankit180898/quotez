@@ -23,7 +23,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    print("data: ${data[1]['second']}");
+    // print("data: ${data[1]['second']}");
     author="${data[0]['first']}";
     quote="${data[1]['second']}";
     category="${data[2]['third']}";
@@ -90,7 +90,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                   IconButton(onPressed: () async{
                     await Clipboard.setData( ClipboardData(text: quote)).then((_) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Copied to your clipboard !')));
+                          const SnackBar(content: Text('Copied to your clipboard!')));
                     });
 
                   }, icon: const Icon(Icons.copy),color: Colors.red,
