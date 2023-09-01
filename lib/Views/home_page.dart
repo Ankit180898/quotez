@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage>  {
           ),
           body: Obx(()=>
             Container(
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                   gradient:themeController.isDarkMode.isFalse? LinearGradient(
                       colors: [Color(0xFF4051A9), Color(0xFF9354B9)],

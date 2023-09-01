@@ -50,6 +50,7 @@ dependencies:
   animate_do:
   carousel_slider:
   home_widget:
+  flutter_floating_bottom_bar:
 
 dev_dependencies:
   flutter_test:
