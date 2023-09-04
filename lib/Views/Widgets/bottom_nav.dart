@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:quotez/Controllers/theme_controller.dart';
@@ -18,13 +19,17 @@ class _BottomNavState extends State<BottomNav> with SingleTickerProviderStateMix
   int _selectedIndex = 0;
   int index_x = 0;
  var controller=Get.find<ThemeController>();
+  final _hideBottomNavController=ScrollController();
+
+  var _visible;
+  var initialIndex=0;
 
   TabController? _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this,initialIndex: initialIndex);
   }
 
   @override
@@ -106,7 +111,7 @@ class _BottomNavState extends State<BottomNav> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Obx(()=>
+      child:
           Scaffold(
             body: TabBarView(
               children: <Widget>[
@@ -119,44 +124,46 @@ class _BottomNavState extends State<BottomNav> with SingleTickerProviderStateMix
               controller: _tabController,
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: Padding(
+            floatingActionButton:Padding(
               padding: const EdgeInsets.all(30.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                  color:controller.isDarkMode.isFalse?Color(0xFF9365C6):Colors.blueGrey.withOpacity(0.2),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TabBar(
-                    dividerColor: Colors.transparent,
-                    indicatorColor: Colors.transparent,
-                    labelColor: controller.isDarkMode.isFalse?Colors.black54:Colors.amber,
-                    unselectedLabelColor: Colors.white,
-                    labelStyle: TextStyle(fontSize: 10.0),
-                    tabs: <Widget>[
-                      Tab(
-                        icon: Icon(Icons.home_rounded,size: 30,),
+              child: Obx(()=>
+                Container(
 
-                      ),
-                      Tab(
-                        icon: Icon(
-                          Icons.search_rounded,
-                          size: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                    color:controller.isDarkMode.isFalse?Color(0xFF9365C6):Colors.blueGrey.withOpacity(0.2),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TabBar(
+                      dividerColor: Colors.transparent,
+                      indicatorColor: Colors.transparent,
+                      labelColor: controller.isDarkMode.isFalse?Colors.black54:Colors.amber,
+                      unselectedLabelColor: Colors.white,
+                      labelStyle: TextStyle(fontSize: 10.0),
+                      tabs: <Widget>[
+                        Tab(
+                          icon: Icon(Icons.home_rounded,size: 30,),
+
                         ),
-                      ),
-                      Tab(
-                        icon: Icon(Icons.bookmark,size: 30,),
-                      ),
+                        Tab(
+                          icon: Icon(
+                            Icons.search_rounded,
+                            size: 30,
+                          ),
+                        ),
+                        Tab(
+                          icon: Icon(Icons.bookmark,size: 30,),
+                        ),
 
-                    ],
-                    controller: _tabController,
+                      ],
+                      controller: _tabController,
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ),
-      ),
             );
 
   }
