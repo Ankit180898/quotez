@@ -53,6 +53,7 @@ dependencies:
   flutter_floating_bottom_bar:
   flutter_colorpicker:
   flutter_tts:
+  screenshot:
 
 dev_dependencies:
   flutter_test:

@@ -81,14 +81,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         style: GoogleFonts.openSans(color: Colors.grey.shade600,fontSize: 14,),
                       ),
                     ),
-                    const SizedBox(height: 20,),
+                    Spacer(),
                     FadeInUp(
                       duration: Duration(milliseconds: 1000),
                       delay: Duration(milliseconds: 1000),
                       child: Align(alignment: Alignment.bottomRight,child: TextButton(onPressed: (){
                         Get.offAll(BottomNav());
                       }, child: Text("EXPLORE NOW",style:GoogleFonts.poppins(color: Colors.black,fontSize: 17,fontWeight: FontWeight.bold),))),
-                    )
+                    ),
+                    Spacer(),
 
                   ],
                 ),
