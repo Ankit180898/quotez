@@ -14,7 +14,7 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Search",
-          style: GoogleFonts.openSans(
+          style: GoogleFonts.inter(
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: Colors.white,

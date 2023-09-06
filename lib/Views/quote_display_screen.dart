@@ -37,12 +37,18 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
 
 
   @override
+  void dispose() {
+    super.dispose();
+    playing.value=false;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           category,
-          style: GoogleFonts.openSans(
+          style: GoogleFonts.inter(
             fontSize: 30,
             fontWeight: FontWeight.bold,
             color: Colors.white,
@@ -87,8 +93,8 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                       child: Text(
                         quote.toString(),
                         textAlign: TextAlign.start,
-                        style: GoogleFonts.poppins(
-                          fontSize: 25.0,
+                        style: GoogleFonts.spaceMono(
+                          fontSize: 20.0,
                           color: themeController.isDarkMode.isFalse
                               ? Colors.white
                               : Colors.white,
@@ -138,7 +144,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                           playing.value=false;
                         }
                       },
-                      icon: playing.value==true?const Icon(Icons.volume_up_rounded):const Icon(Icons.volume_off_rounded),
+                      icon:const Icon(Icons.volume_up_rounded),
                       color: Colors.red,
                     ),
                   ),

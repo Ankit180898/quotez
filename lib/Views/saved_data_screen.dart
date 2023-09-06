@@ -31,7 +31,7 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Liked",style: GoogleFonts.openSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
+          title: Text("Liked",style: GoogleFonts.inter(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
           elevation: 0,
           flexibleSpace:Container(
             decoration:  BoxDecoration(

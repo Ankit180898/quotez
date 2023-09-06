@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage>  {
       child: Obx(()=>
          Scaffold(
           appBar: AppBar(
-            title: Text("Quotez",style: GoogleFonts.openSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
+            title: Text("Quotez",style: GoogleFonts.inter(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
             elevation: 0,
             flexibleSpace:Container(
               decoration:  BoxDecoration(
@@ -126,7 +127,7 @@ class _HomePageState extends State<HomePage>  {
                                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                               children: [
                                                               Text("Quotes",style:
-                                                                GoogleFonts.openSans(fontSize: 20,fontWeight: FontWeight.bold,color: themeController.isDarkMode.isFalse?Colors.black:Colors.black),
+                                                                GoogleFonts.inter(fontSize: 20,fontWeight: FontWeight.bold,color: themeController.isDarkMode.isFalse?Colors.black:Colors.black),
 
                                                               ),
                                                               IconButton(onPressed: () {
@@ -155,7 +156,7 @@ class _HomePageState extends State<HomePage>  {
                                                                 Text(
                                                                   "${controller.randomQuoteList[index].text}",
                                                                   textAlign: TextAlign.center,
-                                                                  style:GoogleFonts.poppins(
+                                                                  style:GoogleFonts.spaceMono(
                                                                     fontSize: 25.0,
                                                                     color:themeController.isDarkMode.isFalse?Colors.black:Colors.black,
                                                                     // Adjust the font size as needed
@@ -248,7 +249,7 @@ class _HomePageState extends State<HomePage>  {
     return Future.delayed(const Duration(milliseconds: 20), () async {
       RenderRepaintBoundary? boundary = previewContainer.currentContext!
           .findRenderObject() as RenderRepaintBoundary?;
-      ui.Image image = await boundary!.toImage();
+      ui.Image image = await boundary!.toImage(pixelRatio: 3.0);
       final directory = (await getApplicationDocumentsDirectory());
       final String path = directory.path;
       ByteData? byteData =
