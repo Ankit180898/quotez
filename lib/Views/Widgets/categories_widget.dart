@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
 class CategoryListWidget extends StatefulWidget {
   final List<String> categories;
@@ -62,6 +63,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
                       selected: _selectedIndex==index,
                       selectedColor: Colors.amber,
                       label: Text(category),
+                      labelStyle: GoogleFonts.inter(fontSize: 15),
                       onSelected: (bool selected) {
                         if(selected){
                           controller.selectedFalse[index]=true;
