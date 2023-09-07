@@ -23,16 +23,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   ];
 
   final List<String> imageList = [
-    "https://cdn.dribbble.com/users/115278/screenshots/16812737/media/93914b7224e59946c61b9dbde7542628.gif",
-    "https://cdn.dribbble.com/users/115278/screenshots/16812737/media/93914b7224e59946c61b9dbde7542628.gif",
-    "https://cdn.dribbble.com/users/115278/screenshots/16812737/media/93914b7224e59946c61b9dbde7542628.gif",
+    "https://cdn.dribbble.com/users/2096933/screenshots/4340168/media/4cedd56ba8f429e9869ea024d7989c32.gif",
+    "https://cdn.dribbble.com/users/2096933/screenshots/4340168/media/4cedd56ba8f429e9869ea024d7989c32.gif",
+    "https://cdn.dribbble.com/users/2096933/screenshots/4340168/media/4cedd56ba8f429e9869ea024d7989c32.gif",
   ];
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFC3A6),
+      backgroundColor: Color(0xffd7f2f2),
       body: Container(
         width: double.infinity,
         child: Column(

@@ -1,15 +1,8 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:quotez/Models/random_quote_model.dart';
 import 'package:quotez/Services/database_helper.dart';
-import 'package:quotez/Services/extension_method.dart';
-
 import '../Models/saved_item_model.dart';
 import '../Services/api_service.dart';
 class HomePageController extends GetxController{
@@ -149,7 +142,6 @@ void adFalse(){
 
     savedItemsList.assignAll(savedItems);
   }
-
 
 
 
