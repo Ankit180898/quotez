@@ -81,30 +81,30 @@ class _HomePageState extends State<HomePage>  {
 
                         Stack(
                           children: [
-                            RepaintBoundary(
-                              key: previewContainer,
-                              child: Container(
-                                child: Swiper(
-                                  itemWidth: MediaQuery.of(context).size.height * 0.80,
-                                 itemHeight: MediaQuery.of(context).size.height * 0.60,
-                                  autoplay: false,
-                                  loop: false,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: controller.randomQuoteList.length,
+                            Container(
+                              child: Swiper(
+                                itemWidth: MediaQuery.of(context).size.height * 0.80,
+                               itemHeight: MediaQuery.of(context).size.height * 0.60,
+                                autoplay: false,
+                                loop: false,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: controller.randomQuoteList.length,
 
-                                                layout: SwiperLayout.TINDER,
-                                                itemBuilder: (context, index) {
-                                                  final item = controller.randomQuoteList[index];
+                                              layout: SwiperLayout.TINDER,
+                                              itemBuilder: (context, index) {
+                                                final item = controller.randomQuoteList[index];
 
-                                                  return InkWell(
-                                                    onTap: (){
-                                                      print("item: ${item.text}");
-                                                      Get.to(QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
-                                                          {"second": item.text.toString()},
-                                                        {"third": item.category.toString()}
-                                                      ]
-                                                      );
-                                                    },
+                                                return InkWell(
+                                                  onTap: (){
+                                                    print("item: ${item.text}");
+                                                    Get.to(QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
+                                                        {"second": item.text.toString()},
+                                                      {"third": item.category.toString()}
+                                                    ]
+                                                    );
+                                                  },
+                                                  child: RepaintBoundary(
+                                                    key: previewContainer,
                                                     child: Container(
                                                       height: MediaQuery.of(context).size.height * 0.30,
                                                       decoration: BoxDecoration(
@@ -218,10 +218,10 @@ class _HomePageState extends State<HomePage>  {
                                                         ),
                                                       ),
                                                     ),
-                                                  );
-                                                },
+                                                  ),
+                                                );
+                                              },
 
-                                ),
                               ),
                             ),
 
