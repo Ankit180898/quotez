@@ -48,7 +48,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
   @override
   void dispose() {
     super.dispose();
-    playing.value=false;
+    ftts.stop();
   }
 
   @override
