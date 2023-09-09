@@ -1,9 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:quotez/Controllers/theme_controller.dart';
 import 'package:quotez/Views/home_page.dart';
@@ -114,14 +109,13 @@ class _BottomNavState extends State<BottomNav> with SingleTickerProviderStateMix
       child:
           Scaffold(
             body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _tabController,
               children: <Widget>[
                 HomePage(),
                 SearchScreen(),
-                SavedDataScreen(),
+                const SavedDataScreen(),
               ],
-              // If you want to disable swiping in tab the use below code
-              physics: NeverScrollableScrollPhysics(),
-              controller: _tabController,
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton:Padding(
@@ -130,8 +124,8 @@ class _BottomNavState extends State<BottomNav> with SingleTickerProviderStateMix
                 Container(
 
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    color:controller.isDarkMode.isFalse?Color(0xFF9365C6):Colors.blueGrey.withOpacity(0.2),
+                    borderRadius: const BorderRadius.all(Radius.circular(50.0)),
+                    color:controller.isDarkMode.isFalse?const Color(0xFF9365C6):Colors.blueGrey.withOpacity(0.2),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -141,7 +135,7 @@ class _BottomNavState extends State<BottomNav> with SingleTickerProviderStateMix
                       labelColor: controller.isDarkMode.isFalse?Colors.black54:Colors.amber,
                       unselectedLabelColor: Colors.white,
                       labelStyle: TextStyle(fontSize: 10.0),
-                      tabs: <Widget>[
+                      tabs: const <Widget>[
                         Tab(
                           icon: Icon(Icons.home_rounded,size: 30,),
 

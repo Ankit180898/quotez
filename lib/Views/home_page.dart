@@ -16,230 +16,284 @@ import '../Controllers/theme_controller.dart';
 import 'Widgets/categories_widget.dart'; // import this
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-class HomePage extends StatefulWidget {
 
+class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>  {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
-  var controller=Get.put(HomePageController());
-  var themeController=Get.find<ThemeController>();
-  GlobalKey previewContainer = GlobalKey();
 
+  var controller = Get.put(HomePageController());
+  var themeController = Get.find<ThemeController>();
+  GlobalKey previewContainer = GlobalKey();
 
   int current = 0;
 
-  var textEditingController=TextEditingController();
+  var textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final currentTheme = themeController.currentTheme;
 
     return SafeArea(
-      child: Obx(()=>
-         Scaffold(
+      child: Obx(
+        () => Scaffold(
           appBar: AppBar(
-            title: Text("Quotez",style: GoogleFonts.inter(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white,),),
+            title: Text(
+              "Quotez",
+              style: GoogleFonts.inter(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
             elevation: 0,
-            flexibleSpace:Container(
-              decoration:  BoxDecoration(
-                color: themeController.isDarkMode.isFalse?Color(0xFF4051A9):Colors.black12
-          ),
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  color: themeController.isDarkMode.isFalse
+                      ? Color(0xFF4051A9)
+                      : Colors.black12),
             ),
             actions: [
-              IconButton(icon: themeController.isDarkMode.isTrue?Icon(Icons.light_mode):Icon(Icons.dark_mode),onPressed: (){
-                themeController.toggleTheme();
-              },)
+              IconButton(
+                icon: themeController.isDarkMode.isTrue
+                    ? Icon(Icons.light_mode)
+                    : Icon(Icons.dark_mode),
+                onPressed: () {
+                  themeController.toggleTheme();
+                },
+              )
             ],
           ),
-          body: Obx(()=>
-            SingleChildScrollView(
+
+          body: Obx(
+            () => SingleChildScrollView(
               child: Container(
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
-                    gradient:themeController.isDarkMode.isFalse? LinearGradient(
-                        colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        stops: const [0.1, 0.9]):null,
-                  color: themeController.isDarkMode.isTrue?Colors.black12:null,
+                  gradient: themeController.isDarkMode.isFalse
+                      ? LinearGradient(
+                          colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: const [0.1, 0.9])
+                      : null,
+                  color:
+                      themeController.isDarkMode.isTrue ? Colors.black12 : null,
                 ),
-
-
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
-                  child:
-                    Column(
-                      children: [
-                        CategoryListWidget(categories: controller.tabsData),
+                  child: Column(
+                    children: [
+                      CategoryListWidget(categories: controller.tabsData),
+                      Stack(
+                        children: [
+                          RepaintBoundary(
+                            key: previewContainer,
+                            child: Container(
+                              child: Swiper(
+                                itemWidth:
+                                    MediaQuery.of(context).size.height * 0.80,
+                                itemHeight:
+                                    MediaQuery.of(context).size.height * 0.60,
+                                autoplay: false,
+                                loop: false,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: controller.randomQuoteList.length,
+                                layout: SwiperLayout.TINDER,
+                                itemBuilder: (context, index) {
+                                  final item =
+                                      controller.randomQuoteList[index];
 
-                        Stack(
-                          children: [
-                            RepaintBoundary(
-                              key: previewContainer,
-                              child: Container(
-                                child: Swiper(
-                                  itemWidth: MediaQuery.of(context).size.height * 0.80,
-                                 itemHeight: MediaQuery.of(context).size.height * 0.60,
-                                  autoplay: false,
-                                  loop: false,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: controller.randomQuoteList.length,
+                                  return InkWell(
+                                    onTap: () {
+                                      print("item: ${item.text}");
+                                      Get.to(QuoteDisplayScreen(), arguments: [
+                                        {"first": item.author.toString()},
+                                        {"second": item.text.toString()},
+                                        {"third": item.category.toString()}
+                                      ]);
+                                    },
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.30,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
+                                          ),
+                                        ],
+                                        color: Colors.white,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(15.0),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "Quotes",
+                                                  style: GoogleFonts.inter(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: themeController
+                                                              .isDarkMode
+                                                              .isFalse
+                                                          ? Colors.black
+                                                          : Colors.black),
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    _captureSocialPng(
+                                                        item.author.toString());
+                                                    // Share.share("${controller.randomQuoteList[index].text}");
+                                                  },
+                                                  icon: const Icon(Icons.share),
+                                                  color: Colors.red,
+                                                )
+                                              ],
+                                            ),
+                                            Spacer(),
+                                            Wrap(
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.center,
+                                              children: [
+                                                Transform(
+                                                  alignment: Alignment.center,
+                                                  transform: Matrix4.rotationY(
+                                                      math.pi),
+                                                  child: Icon(
+                                                    Icons.format_quote,
+                                                    color: Colors.amber,
+                                                    size: 30,
+                                                  ),
+                                                ),
+                                                SizedBox(width: 5),
+                                                Text(
+                                                  "${controller.randomQuoteList[index].text}",
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.spaceMono(
+                                                    fontSize: 25.0,
+                                                    color: themeController
+                                                            .isDarkMode.isFalse
+                                                        ? Colors.black
+                                                        : Colors.black,
+                                                    // Adjust the font size as needed
+                                                    fontWeight: FontWeight
+                                                        .bold, // Adjust the font weight as needed
+                                                  ),
+                                                  maxLines: 5,
+                                                ),
+                                                SizedBox(width: 5),
+                                                Align(
+                                                  alignment:
+                                                      Alignment.bottomRight,
+                                                  child: Icon(
+                                                    Icons.format_quote,
+                                                    color: Colors.amber,
+                                                    size: 30,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // Text(
+                                            //   "${controller.randomQuoteList[index].text}",
+                                            //   textAlign: TextAlign.center,
+                                            //   style:GoogleFonts.poppins(
+                                            //     fontSize: 25.0,
+                                            //     // Adjust the font size as needed
+                                            //     fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                                            //   ),
+                                            //   maxLines: 5,
+                                            //   ),
+                                            //   style: TextStyle(
+                                            //     fontSize: 40.0,
+                                            //     // Adjust the font size as needed
+                                            //     fontWeight: FontWeight.bold, // Adjust the font weight as needed
+                                            //   ),
+                                            //   maxLines: 5,
+                                            // ),
+                                            Spacer(),
+                                            Divider(
+                                              color: Colors.grey,
+                                              thickness: 5,
+                                              indent: 100,
+                                              endIndent: 100,
+                                            ),
+                                            Spacer(),
 
-                                                layout: SwiperLayout.TINDER,
-                                                itemBuilder: (context, index) {
-                                                  final item = controller.randomQuoteList[index];
+                                            Center(
+                                              child: Text(
+                                                  "${controller.randomQuoteList[index].author}",
+                                                  style: GoogleFonts.openSans(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.blueGrey)),
+                                            ),
+                                            Spacer(),
+                                            IconButton(
+                                              onPressed: () {
+                                                // Save the selected item to the database
+                                                controller
+                                                    .saveItemToDatabase(item);
+                                                // Show a message or trigger any other action after saving
+                                                Get.snackbar('Success',
+                                                    'Item saved to database.');
+                                              },
+                                              icon: Icon(Icons.bookmark),
+                                              iconSize: 40,
+                                              color: themeController
+                                                      .isDarkMode.isFalse
+                                                  ? Colors.black
+                                                  : Colors.black,
+                                            ),
 
-                                                  return InkWell(
-                                                    onTap: (){
-                                                      print("item: ${item.text}");
-                                                      Get.to(QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
-                                                          {"second": item.text.toString()},
-                                                        {"third": item.category.toString()}
-                                                      ]
-                                                      );
-                                                    },
-                                                    child: Container(
-                                                      height: MediaQuery.of(context).size.height * 0.30,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.circular(30),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Colors.grey.withOpacity(0.5),
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset: Offset(0, 3), // changes position of shadow
-                                                          ),
-                                                        ],
-                                                        color: Colors.white,
-                                                      ),
-                                                      child: Padding(
-                                                        padding: const EdgeInsets.all(15.0),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                              children: [
-                                                              Text("Quotes",style:
-                                                                GoogleFonts.inter(fontSize: 20,fontWeight: FontWeight.bold,color: themeController.isDarkMode.isFalse?Colors.black:Colors.black),
-
-                                                              ),
-                                                              IconButton(onPressed: () {
-                                                                _captureSocialPng(item.author.toString());
-                                                                // Share.share("${controller.randomQuoteList[index].text}");
-                                                              }, icon: const Icon(Icons.share),color: Colors.red,
-
-
-                                                              )
-                                                              ],
-                                                            ),
-                                                            Spacer(),
-                                                            Wrap(
-                                                              crossAxisAlignment: WrapCrossAlignment.center,
-                                                              children: [
-                                                                Transform(
-                                                                  alignment:Alignment.center,
-                                                                  transform: Matrix4.rotationY(math.pi),
-                                                                  child: Icon(
-                                                                    Icons.format_quote,
-                                                                    color: Colors.amber,
-                                                                    size: 30,
-                                                                  ),
-                                                                ),
-                                                                SizedBox(width: 5),
-                                                                Text(
-                                                                  "${controller.randomQuoteList[index].text}",
-                                                                  textAlign: TextAlign.center,
-                                                                  style:GoogleFonts.spaceMono(
-                                                                    fontSize: 25.0,
-                                                                    color:themeController.isDarkMode.isFalse?Colors.black:Colors.black,
-                                                                    // Adjust the font size as needed
-                                                                    fontWeight: FontWeight.bold, // Adjust the font weight as needed
-                                                                  ),
-                                                                  maxLines: 5,
-                                                                ),
-                                                                SizedBox(width: 5),
-                                                                Align(
-                                                                  alignment:Alignment.bottomRight,
-                                                                  child: Icon(
-                                                                    Icons.format_quote,
-                                                                    color: Colors.amber,
-                                                                    size: 30,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            // Text(
-                                                            //   "${controller.randomQuoteList[index].text}",
-                                                            //   textAlign: TextAlign.center,
-                                                            //   style:GoogleFonts.poppins(
-                                                            //     fontSize: 25.0,
-                                                            //     // Adjust the font size as needed
-                                                            //     fontWeight: FontWeight.bold, // Adjust the font weight as needed
-                                                            //   ),
-                                                            //   maxLines: 5,
-                                                            //   ),
-                                                            //   style: TextStyle(
-                                                            //     fontSize: 40.0,
-                                                            //     // Adjust the font size as needed
-                                                            //     fontWeight: FontWeight.bold, // Adjust the font weight as needed
-                                                            //   ),
-                                                            //   maxLines: 5,
-                                                            // ),
-                                                            Spacer(),
-                                                            Divider(color: Colors.grey,thickness: 5, indent: 100,
-                                                              endIndent: 100,),
-                                                            Spacer(),
-
-                                                            Center(
-                                                              child: Text("${controller.randomQuoteList[index].author}",style:
-
-                                                                GoogleFonts.openSans(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blueGrey)
-                                                            ),
-                                                          ),
-                                                          Spacer(),
-                                                          IconButton(onPressed: () {
-                                                              // Save the selected item to the database
-                                                              controller.saveItemToDatabase(item);
-                                                              // Show a message or trigger any other action after saving
-                                                              Get.snackbar('Success', 'Item saved to database.');
-
-                                                            }, icon:Icon(Icons.bookmark),iconSize: 40,color:themeController.isDarkMode.isFalse?Colors.black:Colors.black,),
-
-                                                            Spacer(),
-
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-
-                                ),
+                                            Spacer(),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
-
-                          ],
-                        ),
-                        Align(alignment:Alignment.center,child: controller.isLoading.value==true?CircularProgressIndicator(
-                          color: themeController.isDarkMode.isTrue?Colors.amber:Colors.blueGrey,
-                        ):SizedBox()),
-
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      Align(
+                          alignment: Alignment.center,
+                          child: controller.isLoading.value == true
+                              ? CircularProgressIndicator(
+                                  color: themeController.isDarkMode.isTrue
+                                      ? Colors.amber
+                                      : Colors.blueGrey,
+                                )
+                              : SizedBox()),
+                    ],
                   ),
-                  ),
-            ),
+                ),
+              ),
             ),
           ),
+        ),
       ),
-
     );
   }
 
@@ -253,7 +307,7 @@ class _HomePageState extends State<HomePage>  {
       final directory = (await getApplicationDocumentsDirectory());
       final String path = directory.path;
       ByteData? byteData =
-      await image.toByteData(format: ui.ImageByteFormat.png);
+          await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List pngBytes = byteData!.buffer.asUint8List();
       File imgFile = File('$path/$name.png');
       imagePaths.add(imgFile.path);
@@ -267,6 +321,4 @@ class _HomePageState extends State<HomePage>  {
       });
     });
   }
-
 }
-
