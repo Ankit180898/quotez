@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quotez/Views/khushi_screen.dart';
 
 import 'Widgets/bottom_nav.dart';
 
@@ -87,6 +88,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       delay: Duration(milliseconds: 1000),
                       child: Align(alignment: Alignment.bottomRight,child: TextButton(onPressed: (){
                         Get.offAll(BottomNav());
+                        // Get.offAll(KhushiScreen());
                       }, child: Text("EXPLORE NOW",style:GoogleFonts.poppins(color: Colors.black,fontSize: 17,fontWeight: FontWeight.bold),))),
                     ),
                     Spacer(),

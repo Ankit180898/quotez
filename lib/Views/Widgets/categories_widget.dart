@@ -14,6 +14,8 @@ class CategoryListWidget extends StatefulWidget {
 class _CategoryListWidgetState extends State<CategoryListWidget> {
   var controller=Get.find<HomePageController>();
   int? _selectedIndex;
+  String? selectedFruit;
+  List<String> selectedCategory=[];
 
 
   @override
@@ -60,22 +62,24 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
             return Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: ChoiceChip(
-                      selected: _selectedIndex==index,
+                      selected:selectedCategory.contains(category),
                       selectedColor: Colors.amber,
                       label: Text(category),
                       labelStyle: GoogleFonts.inter(fontSize: 15),
                       onSelected: (bool selected) {
-                        if(selected){
-                          controller.selectedFalse[index]=true;
-                          setState(() {
-                            _selectedIndex = index;
-                          });
-                          controller.getQuoteFromCategory(category);
+
+                          toggleCategories(category);
                         }
-                        controller.selectedFalse[index]=false;
+                        //   controller.selectedFalse[index]=true;
+                        //   setState(() {
+                        //     _selectedIndex = index;
+                        //   });
+                        //   controller.getQuoteFromCategory(category);
+                        // }
+                        // controller.selectedFalse[index]=false;
 
 
-                      }
+
                   ),
             );
           },
@@ -83,5 +87,21 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
 
       ),
     );
+  }
+
+  //function to toggle chips
+  void toggleCategories(String cat){
+    setState(() {
+      if(selectedCategory.contains(cat)){
+        selectedCategory.remove(cat);
+        controller.getQuoteFromCategory("all");
+        print("selectedcat: ${selectedCategory.length}");
+      }
+      else{
+        selectedCategory.clear();
+        selectedCategory.add(cat);
+        controller.getQuoteFromCategory(cat);
+      }
+    });
   }
 }
