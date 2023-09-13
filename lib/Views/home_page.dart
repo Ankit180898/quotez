@@ -91,7 +91,15 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      CategoryListWidget(categories: controller.tabsData),
+                      IconButton(onPressed: (){
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return CategoryListWidget(categories: controller.tabsData);
+                          },
+                        );
+                      }, icon: Icon(Icons.filter_list_rounded)),
+                      // CategoryListWidget(categories: controller.tabsData),
                       Stack(
                         children: [
                           RepaintBoundary(

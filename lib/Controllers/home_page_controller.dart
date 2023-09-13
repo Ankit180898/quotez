@@ -11,14 +11,14 @@ class HomePageController extends GetxController{
   @override
   void onInit() {
     getCategories();
-    // getFilteredData();
+    getFilteredData();
 fetchDataFromDatabase();
     super.onInit();
 
   }
   final DatabaseHelper dbHelper = DatabaseHelper();
-
-  final tabsData = <String>[].obs;
+  // List<String> tabsData=[];
+   final tabsData = <String>[].obs;
   var isLoading=false.obs;
   var selectedCategory = ''.obs;
   var dataList = <String>[].obs; // Replace 'String' with your data model type

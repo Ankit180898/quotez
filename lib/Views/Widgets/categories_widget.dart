@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
@@ -15,75 +16,96 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
   var controller=Get.find<HomePageController>();
   int? _selectedIndex;
   String? selectedFruit;
-  List<String> selectedCategory=[];
+  RxList selectedCategory=[].obs;
 
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       child: Obx(()=>
+        //old code with horizontal list
         //  ListView.builder(
         //   scrollDirection: Axis.horizontal,
         //   shrinkWrap: true,
-        //   itemCount: categories.length,
+        //   itemCount: widget.categories.length,
         //   itemBuilder: (context, index) {
-        //     final category = categories[index];
-        //     return InkWell(
-        //       onTap: () {
-        //         controller.getQuoteFromCategory(category);
-        //       },
-        //       child: Container(
-        //         height: 100,
-        //         width: 100,
-        //         padding: EdgeInsets.all(10),
-        //         margin: EdgeInsets.symmetric(horizontal: 5),
-        //         decoration: BoxDecoration(
-        //           color: Colors.white,
-        //           borderRadius: BorderRadius.all(Radius.circular(30)),
-        //           border: Border.all(
-        //             width: 5,
-        //             color: controller.selectedCategory.value == category
-        //                 ? Colors.blue // Highlight the selected category
-        //                 : Colors.black,
+        //     final category = widget.categories[index];
+        //     return Padding(
+        //       padding: const EdgeInsets.only(right: 10.0),
+        //       child: ChoiceChip(
+        //               selected:selectedCategory.contains(category),
+        //               selectedColor: Colors.amber,
+        //               label: Text(category),
+        //               labelStyle: GoogleFonts.inter(fontSize: 15),
+        //               onSelected: (bool selected) {
+        //
+        //                   toggleCategories(category);
+        //                 }
+        //                 //   controller.selectedFalse[index]=true;
+        //                 //   setState(() {
+        //                 //     _selectedIndex = index;
+        //                 //   });
+        //                 //   controller.getQuoteFromCategory(category);
+        //                 // }
+        //                 // controller.selectedFalse[index]=false;
+        //
+        //
+        //
         //           ),
-        //         ),
-        //         child: Center(child: Text(category)),
-        //       ),
         //     );
         //   },
         // ),
-        ListView.builder(
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: widget.categories.length,
-          itemBuilder: (context, index) {
-            final category = widget.categories[index];
-            return Padding(
-              padding: const EdgeInsets.only(right: 10.0),
-              child: ChoiceChip(
-                      selected:selectedCategory.contains(category),
-                      selectedColor: Colors.amber,
-                      label: Text(category),
-                      labelStyle: GoogleFonts.inter(fontSize: 15),
-                      onSelected: (bool selected) {
 
-                          toggleCategories(category);
-                        }
-                        //   controller.selectedFalse[index]=true;
-                        //   setState(() {
-                        //     _selectedIndex = index;
-                        //   });
-                        //   controller.getQuoteFromCategory(category);
-                        // }
-                        // controller.selectedFalse[index]=false;
+        Padding(
+          padding: const EdgeInsets.only(right: 10.0,top: 10.0),
+          child: Scrollbar(
+            thumbVisibility: true,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Categories",
+                      style:GoogleFonts.inter(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Wrap(
+                      runSpacing: 10.0,
+                      spacing: 10.0,
+                      children: controller.tabsData.map((e) {
+                        return ChoiceChip(
+                            selected:selectedCategory.contains(e),
+                            selectedColor: Colors.amber,
+                            label: Text(e),
+                            labelStyle: GoogleFonts.inter(fontSize: 15),
+                            onSelected: (bool selected) {
+
+                              toggleCategories(e);
+                            }
+                          //   controller.selectedFalse[index]=true;
+                          //   setState(() {
+                          //     _selectedIndex = index;
+                          //   });
+                          //   controller.getQuoteFromCategory(category);
+                          // }
+                          // controller.selectedFalse[index]=false;
 
 
 
-                  ),
-            );
-          },
-        ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        )
 
       ),
     );
@@ -91,7 +113,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
 
   //function to toggle chips
   void toggleCategories(String cat){
-    setState(() {
+
       if(selectedCategory.contains(cat)){
         selectedCategory.remove(cat);
         controller.getQuoteFromCategory("all");
@@ -102,6 +124,31 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
         selectedCategory.add(cat);
         controller.getQuoteFromCategory(cat);
       }
-    });
   }
 }
+
+/**
+ * Padding(
+    padding: const EdgeInsets.only(right: 10.0),
+    child: ChoiceChip(
+    selected:selectedCategory.contains(category),
+    selectedColor: Colors.amber,
+    label: Text(category),
+    labelStyle: GoogleFonts.inter(fontSize: 15),
+    onSelected: (bool selected) {
+
+    toggleCategories(category);
+    }
+    //   controller.selectedFalse[index]=true;
+    //   setState(() {
+    //     _selectedIndex = index;
+    //   });
+    //   controller.getQuoteFromCategory(category);
+    // }
+    // controller.selectedFalse[index]=false;
+
+
+
+    ),
+    );
+ */
