@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:quotez/Controllers/theme_controller.dart';
 import 'package:quotez/Views/home_page.dart';
@@ -6,6 +7,7 @@ import 'package:quotez/Views/saved_data_screen.dart';
 import 'package:quotez/Views/search_screen.dart';
 
 import 'common_bottom_sheet.dart';
+var  HideBottomAppBarController=ScrollController();
 
 class BottomNav extends StatefulWidget {
   @override
@@ -14,10 +16,12 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav>
     with SingleTickerProviderStateMixin {
+
+  var _isVisible;
   int _selectedIndex = 0;
   int index_x = 0;
   var controller = Get.find<ThemeController>();
-  final _hideBottomNavController = ScrollController();
+
 
   var _visible;
   var initialIndex = 0;
@@ -25,10 +29,26 @@ class _BottomNavState extends State<BottomNav>
   TabController? _tabController;
 
   @override
-  void initState() {
+  initState() {
     super.initState();
     _tabController =
         TabController(length: 2, vsync: this, initialIndex: initialIndex);
+    _isVisible = true;
+    HideBottomAppBarController = ScrollController();
+    HideBottomAppBarController.addListener(() {
+      if (HideBottomAppBarController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        setState(() {
+          _isVisible = false;
+        });
+      }
+      if (HideBottomAppBarController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        setState(() {
+          _isVisible = true;
+        });
+      }
+    });
   }
 
   @override
@@ -124,61 +144,63 @@ class _BottomNavState extends State<BottomNav>
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(30.0),
-            child: Obx(
-              () => Container(
-                child: Stack(
+            child: AnimatedContainer(
+                duration: Duration(milliseconds: 50),
+                child: _isVisible==true?Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(50.0)),
-                          color: controller.isDarkMode.isFalse
-                              ? const Color(0xFF9365C6)
-                              : Colors.blueGrey.withOpacity(0.2),
-                          border: Border.all(
-                              color: controller.isDarkMode.isFalse
-                                  ? Colors.transparent
-                                  : Colors.white,
-                              width: 2)),
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        alignment: Alignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: TabBar(
-                              dividerColor: Colors.transparent,
-                              indicatorColor: Colors.transparent,
-                              labelColor: controller.isDarkMode.isFalse
-                                  ? Colors.black54
-                                  : Colors.amber,
-                              unselectedLabelColor: Colors.white,
-                              labelStyle: TextStyle(fontSize: 10.0),
-                              tabs: const <Widget>[
-                                Tab(
-                                  icon: Icon(
-                                    Icons.home_rounded,
-                                    size: 30,
+                    Obx(()=>
+                       Container(
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(50.0)),
+                            color: controller.isDarkMode.isFalse
+                                ? const Color(0xFF9365C6)
+                                : Colors.blueGrey.withOpacity(0.2),
+                            border: Border.all(
+                                color: controller.isDarkMode.isFalse
+                                    ? Colors.transparent
+                                    : Colors.white,
+                                width: 2)),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TabBar(
+                                dividerColor: Colors.transparent,
+                                indicatorColor: Colors.transparent,
+                                labelColor: controller.isDarkMode.isFalse
+                                    ? Colors.black54
+                                    : Colors.amber,
+                                unselectedLabelColor: Colors.white,
+                                labelStyle: TextStyle(fontSize: 10.0),
+                                tabs: const <Widget>[
+                                  Tab(
+                                    icon: Icon(
+                                      Icons.home_rounded,
+                                      size: 30,
+                                    ),
                                   ),
-                                ),
-                                // Tab(
-                                //   icon: Icon(
-                                //     Icons.search_rounded,
-                                //     size: 30,
-                                //   ),
-                                // ),
-                                Tab(
-                                  icon: Icon(
-                                    Icons.bookmark,
-                                    size: 30,
+                                  // Tab(
+                                  //   icon: Icon(
+                                  //     Icons.search_rounded,
+                                  //     size: 30,
+                                  //   ),
+                                  // ),
+                                  Tab(
+                                    icon: Icon(
+                                      Icons.bookmark,
+                                      size: 30,
+                                    ),
                                   ),
-                                ),
-                              ],
-                              controller: _tabController,
+                                ],
+                                controller: _tabController,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     Positioned(
@@ -225,9 +247,8 @@ class _BottomNavState extends State<BottomNav>
                           ),
                         ))
                   ],
-                ),
+                ):Text(""),
               ),
-            ),
           )),
     );
   }

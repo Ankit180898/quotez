@@ -6,6 +6,7 @@ import '../Controllers/home_page_controller.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../Controllers/theme_controller.dart';
+import 'Widgets/bottom_nav.dart';
 
 class SavedDataScreen extends StatefulWidget {
   const SavedDataScreen({super.key});
@@ -65,6 +66,7 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                 return Padding(
                   padding: const EdgeInsets.only(left: 15.0,right: 15.0,top: 15.0),
                   child: MasonryGridView.count(
+                    controller: HideBottomAppBarController,
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 12,

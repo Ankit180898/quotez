@@ -59,46 +59,50 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
         Padding(
           padding: const EdgeInsets.only(right: 10.0,top: 10.0),
           child: Scrollbar(
-            thumbVisibility: true,
+            // thumbVisibility: true,
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+
                   children: [
                     Text("Categories",
                       style:GoogleFonts.inter(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     SizedBox(height: 10,),
-                    Wrap(
-                      runSpacing: 10.0,
-                      spacing: 10.0,
-                      children: controller.tabsData.map((e) {
-                        return ChoiceChip(
-                            selected:selectedCategory.contains(e),
-                            selectedColor: Colors.amber,
-                            label: Text(e),
-                            labelStyle: GoogleFonts.inter(fontSize: 15),
-                            onSelected: (bool selected) {
+                    Container(
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        runSpacing: 10.0,
+                        spacing: 10.0,
+                        alignment: WrapAlignment.start,
+                        children: controller.tabsData.map((e) {
+                          return ChoiceChip(
+                              selected:selectedCategory.contains(e),
+                              selectedColor: Colors.amber,
+                              label: Text(e),
+                              labelStyle: GoogleFonts.inter(fontSize: 15),
+                              onSelected: (bool selected) {
 
-                              toggleCategories(e);
-                            }
-                          //   controller.selectedFalse[index]=true;
-                          //   setState(() {
-                          //     _selectedIndex = index;
-                          //   });
-                          //   controller.getQuoteFromCategory(category);
-                          // }
-                          // controller.selectedFalse[index]=false;
+                                toggleCategories(e);
+                              }
+                            //   controller.selectedFalse[index]=true;
+                            //   setState(() {
+                            //     _selectedIndex = index;
+                            //   });
+                            //   controller.getQuoteFromCategory(category);
+                            // }
+                            // controller.selectedFalse[index]=false;
 
 
 
-                        );
-                      }).toList(),
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ],
                 ),
