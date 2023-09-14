@@ -50,8 +50,6 @@ dependencies:
   animate_do:
   carousel_slider:
   home_widget:
-  flutter_floating_bottom_bar:
-  flutter_colorpicker:
   flutter_tts:
   screenshot:
   flip_card:

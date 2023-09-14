@@ -145,7 +145,8 @@ class _BottomNavState extends State<BottomNav>
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(30.0),
             child: AnimatedContainer(
-                duration: Duration(milliseconds: 50),
+              duration: Duration(milliseconds: 70),
+              height: _isVisible ? 70.0 : 0.0,
                 child: _isVisible==true?Stack(
                   clipBehavior: Clip.none,
                   children: [
@@ -153,10 +154,10 @@ class _BottomNavState extends State<BottomNav>
                        Container(
                         decoration: BoxDecoration(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(50.0)),
+                                const BorderRadius.all(Radius.circular(80.0)),
                             color: controller.isDarkMode.isFalse
                                 ? const Color(0xFF9365C6)
-                                : Colors.blueGrey.withOpacity(0.2),
+                                : Colors.blueGrey,
                             border: Border.all(
                                 color: controller.isDarkMode.isFalse
                                     ? Colors.transparent
@@ -210,39 +211,41 @@ class _BottomNavState extends State<BottomNav>
                         child: Padding(
                           padding:
                               const EdgeInsets.only(left: 135.0, right: 135),
-                          child: FloatingActionButton(
-                            autofocus: false,
-                            shape: CircleBorder(
-                              side: BorderSide(
-                                color: controller.isDarkMode.isFalse?Colors.white12:Colors.white,
-                                width: 2
-                              )
-                            ),
-                            backgroundColor: controller.isDarkMode.isFalse
-                                ? const Color(0xFF9365C6).withOpacity(0.9)
-                                : Colors.blueGrey,
-                            elevation: 6,
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (context) => SingleChildScrollView(
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
-                                    child: BottomSheetExample(),
+                          child: Obx(()=>
+                            FloatingActionButton(
+                              autofocus: false,
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  color: controller.isDarkMode.isFalse?Colors.white12:Colors.white,
+                                  width: 2
+                                )
+                              ),
+                              backgroundColor: controller.isDarkMode.isFalse
+                                  ? const Color(0xFF9365C6).withOpacity(0.9)
+                                  : Colors.blueGrey,
+                              elevation: 6,
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) => SingleChildScrollView(
+                                    child: Container(
+                                      padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom),
+                                      child: BottomSheetExample(),
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                            child: Icon(
-                              Icons.search_rounded,
-                              color: controller.isDarkMode.isFalse
-                                  ? Colors.white
-                                  : Colors.white,
-                              size: 25,
+                                );
+                              },
+                              child: Icon(
+                                Icons.search_rounded,
+                                color: controller.isDarkMode.isFalse
+                                    ? Colors.white
+                                    : Colors.white,
+                                size: 25,
+                              ),
                             ),
                           ),
                         ))

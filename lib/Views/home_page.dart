@@ -15,7 +15,6 @@ import 'dart:ui' as ui;
 import '../Controllers/theme_controller.dart';
 import 'Widgets/categories_widget.dart'; // import this
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class HomePage extends StatefulWidget {
   @override
