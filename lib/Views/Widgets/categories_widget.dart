@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
+import 'package:quotez/Controllers/theme_controller.dart';
 class CategoryListWidget extends StatefulWidget {
   final List<String> categories;
 
@@ -14,6 +15,7 @@ class CategoryListWidget extends StatefulWidget {
 
 class _CategoryListWidgetState extends State<CategoryListWidget> {
   var controller=Get.find<HomePageController>();
+  var themeController=Get.find<ThemeController>();
   int? _selectedIndex;
   String? selectedFruit;
   RxList selectedCategory=[].obs;
@@ -70,7 +72,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
                       style:GoogleFonts.inter(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: themeController.isDarkMode.isFalse?Colors.black:Colors.white,
                       ),
                     ),
                     SizedBox(height: 10,),

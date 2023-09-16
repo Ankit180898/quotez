@@ -152,6 +152,7 @@ class _BottomNavState extends State<BottomNav>
                   children: [
                     Obx(()=>
                        Container(
+                         width: MediaQuery.of(context).size.width * 0.50,
                         decoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(80.0)),
@@ -204,51 +205,51 @@ class _BottomNavState extends State<BottomNav>
                         ),
                       ),
                     ),
-                    Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 35,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 135.0, right: 135),
-                          child: Obx(()=>
-                            FloatingActionButton(
-                              autofocus: false,
-                              shape: CircleBorder(
-                                side: BorderSide(
-                                  color: controller.isDarkMode.isFalse?Colors.white12:Colors.white,
-                                  width: 2
-                                )
-                              ),
-                              backgroundColor: controller.isDarkMode.isFalse
-                                  ? const Color(0xFF9365C6).withOpacity(0.9)
-                                  : Colors.blueGrey,
-                              elevation: 6,
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  builder: (context) => SingleChildScrollView(
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                              .viewInsets
-                                              .bottom),
-                                      child: BottomSheetExample(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Icon(
-                                Icons.search_rounded,
-                                color: controller.isDarkMode.isFalse
-                                    ? Colors.white
-                                    : Colors.white,
-                                size: 25,
-                              ),
-                            ),
-                          ),
-                        ))
+                    // Positioned(
+                    //     left: 0,
+                    //     right: 0,
+                    //     bottom: 35,
+                    //     child: Padding(
+                    //       padding:
+                    //           const EdgeInsets.only(left: 135.0, right: 135),
+                    //       child: Obx(()=>
+                    //         FloatingActionButton(
+                    //           autofocus: false,
+                    //           shape: CircleBorder(
+                    //             side: BorderSide(
+                    //               color: controller.isDarkMode.isFalse?Colors.white12:Colors.white,
+                    //               width: 2
+                    //             )
+                    //           ),
+                    //           backgroundColor: controller.isDarkMode.isFalse
+                    //               ? const Color(0xFF9365C6).withOpacity(0.9)
+                    //               : Colors.blueGrey,
+                    //           elevation: 6,
+                    //           onPressed: () {
+                    //             showModalBottomSheet(
+                    //               context: context,
+                    //               isScrollControlled: true,
+                    //               builder: (context) => SingleChildScrollView(
+                    //                 child: Container(
+                    //                   padding: EdgeInsets.only(
+                    //                       bottom: MediaQuery.of(context)
+                    //                           .viewInsets
+                    //                           .bottom),
+                    //                   child: BottomSheetExample(),
+                    //                 ),
+                    //               ),
+                    //             );
+                    //           },
+                    //           child: Icon(
+                    //             Icons.search_rounded,
+                    //             color: controller.isDarkMode.isFalse
+                    //                 ? Colors.white
+                    //                 : Colors.white,
+                    //             size: 25,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ))
                   ],
                 ):Text(""),
               ),

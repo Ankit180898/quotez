@@ -16,6 +16,8 @@ import '../Controllers/theme_controller.dart';
 import 'Widgets/categories_widget.dart'; // import this
 import 'package:path_provider/path_provider.dart';
 
+import 'Widgets/common_bottom_sheet.dart';
+
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
@@ -90,14 +92,76 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      IconButton(onPressed: (){
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return CategoryListWidget(categories: controller.tabsData);
-                          },
-                        );
-                      }, icon: Icon(Icons.filter_list_rounded)),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(onPressed: (){
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return CategoryListWidget(categories: controller.tabsData);
+                              },
+                            );
+                          }, icon: Icon(Icons.filter_list_rounded,
+                            color: themeController.isDarkMode.isFalse
+                                ? Colors.white
+                                : Colors.white,
+                            size: 25,
+                          )),
+                          IconButton(onPressed: (){
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (context) => SingleChildScrollView(
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context)
+                                          .viewInsets
+                                          .bottom),
+                                  child: BottomSheetExample(),
+                                ),
+                              ),
+                            );
+                          }, icon: Icon(
+                            Icons.search_rounded,
+                            color: themeController.isDarkMode.isFalse
+                                ? Colors.white
+                                : Colors.white,
+                            size: 25,
+                          ),),
+                          // Obx(()=>
+                          //     FloatingActionButton(
+                          //       autofocus: false,
+                          //       backgroundColor: themeController.isDarkMode.isFalse
+                          //           ? const Color(0xFF9365C6).withOpacity(0.9)
+                          //           : Colors.blueGrey,
+                          //       elevation: 6,
+                          //       onPressed: () {
+                          //         showModalBottomSheet(
+                          //           context: context,
+                          //           isScrollControlled: true,
+                          //           builder: (context) => SingleChildScrollView(
+                          //             child: Container(
+                          //               padding: EdgeInsets.only(
+                          //                   bottom: MediaQuery.of(context)
+                          //                       .viewInsets
+                          //                       .bottom),
+                          //               child: BottomSheetExample(),
+                          //             ),
+                          //           ),
+                          //         );
+                          //       },
+                          //       child: Icon(
+                          //         Icons.search_rounded,
+                          //         color: themeController.isDarkMode.isFalse
+                          //             ? Colors.white
+                          //             : Colors.white,
+                          //         size: 25,
+                          //       ),
+                          //     ),
+                          // ),
+                        ],
+                      ),
                       // CategoryListWidget(categories: controller.tabsData),
                       Stack(
                         children: [
