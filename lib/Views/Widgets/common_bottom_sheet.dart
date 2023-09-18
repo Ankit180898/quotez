@@ -59,6 +59,9 @@ class BottomSheetExample extends StatelessWidget {
             prefixIconData: Icons.search_rounded,
             textInputAction: TextInputAction.next,
             accentColor: Colors.white,
+            onChanged: (query){
+
+            },
           ),
           SizedBox(height: 10,),
           RawMaterialButton(
@@ -78,7 +81,7 @@ class BottomSheetExample extends StatelessWidget {
             ),
             fillColor: const Color(0xFF9365C6),
             onPressed: () {
-              Navigator.pop(context);
+
             },
           ),
         ],

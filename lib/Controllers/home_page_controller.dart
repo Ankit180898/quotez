@@ -143,6 +143,21 @@ void adFalse(){
     savedItemsList.assignAll(savedItems);
   }
 
+  var filteredCat=<String>[];
+  void searchQuery(String query){
+    if (query.isEmpty) {
+      // If the search query is empty, reset the categories list to show all categories.
+      tabsData;
+    } else {
+      // If there is a search query, filter categories based on the query.
+      filteredCat = tabsData
+          .where((category) =>
+          category.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+      tabsData.value = filteredCat;
+    }
+  }
+  }
 
 
 
@@ -152,4 +167,3 @@ void adFalse(){
 
 
 
-}
