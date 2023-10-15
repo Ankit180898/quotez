@@ -55,7 +55,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               duration: Duration(milliseconds: 1000),
               delay: Duration(milliseconds: 500),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.25,
+                height: MediaQuery.of(context).size.height * 0.30,
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
                 decoration: BoxDecoration(
@@ -65,6 +65,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Spacer(),
                     FadeInUp(
                       duration: Duration(milliseconds: 1000),
                       delay: Duration(milliseconds: 1000),
@@ -72,7 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       style: GoogleFonts.poppins(color: Colors.black,fontSize: 24,fontWeight: FontWeight.bold),
                       ),
                     ),
-                    const SizedBox(height: 15,),
+
                     FadeInUp(
                       duration: Duration(milliseconds: 1000),
                       delay: Duration(milliseconds: 1000),
@@ -80,7 +81,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         style: GoogleFonts.openSans(color: Colors.grey.shade600,fontSize: 14,),
                       ),
                     ),
-                    Spacer(),
                     FadeInUp(
                       duration: Duration(milliseconds: 1000),
                       delay: Duration(milliseconds: 1000),

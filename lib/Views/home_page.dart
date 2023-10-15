@@ -72,7 +72,6 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-
           body: Obx(
             () => SingleChildScrollView(
               child: Container(
@@ -95,40 +94,47 @@ class _HomePageState extends State<HomePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          IconButton(onPressed: (){
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return CategoryListWidget(categories: controller.tabsData);
+                          IconButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CategoryListWidget(
+                                        categories: controller.tabsData);
+                                  },
+                                );
                               },
-                            );
-                          }, icon: Icon(Icons.filter_list_rounded,
-                            color: themeController.isDarkMode.isFalse
-                                ? Colors.white
-                                : Colors.white,
-                            size: 25,
-                          )),
-                          IconButton(onPressed: (){
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (context) => SingleChildScrollView(
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom),
-                                  child: BottomSheetExample(),
+                              icon: Icon(
+                                Icons.filter_list_rounded,
+                                color: themeController.isDarkMode.isFalse
+                                    ? Colors.white
+                                    : Colors.white,
+                                size: 25,
+                              )),
+                          IconButton(
+                            onPressed: () {
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                builder: (context) => SingleChildScrollView(
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom),
+                                    child: BottomSheetExample(),
+                                  ),
                                 ),
-                              ),
-                            );
-                          }, icon: Icon(
-                            Icons.search_rounded,
-                            color: themeController.isDarkMode.isFalse
-                                ? Colors.white
-                                : Colors.white,
-                            size: 25,
-                          ),),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.search_rounded,
+                              color: themeController.isDarkMode.isFalse
+                                  ? Colors.white
+                                  : Colors.white,
+                              size: 25,
+                            ),
+                          ),
                           // Obx(()=>
                           //     FloatingActionButton(
                           //       autofocus: false,
@@ -169,8 +175,7 @@ class _HomePageState extends State<HomePage> {
                             key: previewContainer,
                             child: Container(
                               child: Swiper(
-                                itemWidth:
-                                    MediaQuery.of(context).size.height * 0.80,
+                                itemWidth: MediaQuery.of(context).size.width,
                                 itemHeight:
                                     MediaQuery.of(context).size.height * 0.60,
                                 autoplay: false,
@@ -269,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontWeight: FontWeight
                                                         .bold, // Adjust the font weight as needed
                                                   ),
-                                                  maxLines: 5,
+                                                  maxLines: 3,
                                                 ),
                                                 SizedBox(width: 5),
                                                 Align(
