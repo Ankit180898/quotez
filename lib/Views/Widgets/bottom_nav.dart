@@ -6,10 +6,11 @@ import 'package:quotez/Views/home_page.dart';
 import 'package:quotez/Views/saved_data_screen.dart';
 import 'package:quotez/Views/search_screen.dart';
 
-import 'common_bottom_sheet.dart';
 var  HideBottomAppBarController=ScrollController();
 
 class BottomNav extends StatefulWidget {
+  const BottomNav({super.key});
+
   @override
   State<BottomNav> createState() => _BottomNavState();
 }
@@ -18,7 +19,7 @@ class _BottomNavState extends State<BottomNav>
     with SingleTickerProviderStateMixin {
 
   var _isVisible;
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
   int index_x = 0;
   var controller = Get.find<ThemeController>();
 
@@ -58,9 +59,9 @@ class _BottomNavState extends State<BottomNav>
   }
 
   final screens = [
-    HomePage(),
+    const HomePage(),
     SearchScreen(),
-    SavedDataScreen(),
+    const SavedDataScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -134,10 +135,10 @@ class _BottomNavState extends State<BottomNav>
             clipBehavior: Clip.none,
             physics: const NeverScrollableScrollPhysics(),
             controller: _tabController,
-            children: <Widget>[
+            children: const <Widget>[
               HomePage(),
               // SearchScreen(),
-              const SavedDataScreen(),
+              SavedDataScreen(),
             ],
           ),
           floatingActionButtonLocation:
@@ -145,7 +146,7 @@ class _BottomNavState extends State<BottomNav>
           floatingActionButton: Padding(
             padding: const EdgeInsets.all(30.0),
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 70),
+              duration: const Duration(milliseconds: 70),
               height: _isVisible ? 70.0 : 0.0,
                 child: _isVisible==true?Stack(
                   clipBehavior: Clip.none,
@@ -177,7 +178,7 @@ class _BottomNavState extends State<BottomNav>
                                     ? Colors.black54
                                     : Colors.amber,
                                 unselectedLabelColor: Colors.white,
-                                labelStyle: TextStyle(fontSize: 10.0),
+                                labelStyle: const TextStyle(fontSize: 10.0),
                                 tabs: const <Widget>[
                                   Tab(
                                     icon: Icon(
@@ -251,7 +252,7 @@ class _BottomNavState extends State<BottomNav>
                     //       ),
                     //     ))
                   ],
-                ):Text(""),
+                ):const Text(""),
               ),
           )),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
@@ -7,7 +6,7 @@ import 'package:quotez/Controllers/theme_controller.dart';
 class CategoryListWidget extends StatefulWidget {
   final List<String> categories;
 
-  CategoryListWidget({required this.categories});
+  const CategoryListWidget({super.key, required this.categories});
 
   @override
   State<CategoryListWidget> createState() => _CategoryListWidgetState();
@@ -75,7 +74,7 @@ class _CategoryListWidgetState extends State<CategoryListWidget> {
                         color: themeController.isDarkMode.isFalse?Colors.black:Colors.white,
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
                       child: Wrap(
                         direction: Axis.horizontal,

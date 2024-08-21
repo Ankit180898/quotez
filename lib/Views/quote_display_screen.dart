@@ -11,12 +11,10 @@ import '../Controllers/home_page_controller.dart';
 import '../Controllers/theme_controller.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:flutter/services.dart';
 
 class QuoteDisplayScreen extends StatefulWidget {
-  QuoteDisplayScreen({super.key});
+  const QuoteDisplayScreen({super.key});
 
   @override
   State<QuoteDisplayScreen> createState() => _QuoteDisplayScreenState();
@@ -67,7 +65,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
               color: themeController.isDarkMode.isFalse
-                  ? Color(0xFF4051A9)
+                  ? const Color(0xFF4051A9)
                   : Colors.black12),
         ),
       ),
@@ -75,11 +73,11 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
         Container(
           decoration: BoxDecoration(
             gradient: themeController.isDarkMode.isFalse
-                ? LinearGradient(
+                ? const LinearGradient(
                     colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: const [0.1, 0.9])
+                    stops: [0.1, 0.9])
                 : null,
             color: themeController.isDarkMode.isTrue ? Colors.black12 : null,
           ),
@@ -93,7 +91,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                     RepaintBoundary(
                       key: previewDisplayContainer,
                      child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           // borderRadius: BorderRadius.circular(30),
                           // border: Border.all(
                           //     color: themeController.isDarkMode.isFalse

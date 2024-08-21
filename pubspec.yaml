@@ -54,6 +54,7 @@ dependencies:
   screenshot:
   flip_card:
 
+  path_provider: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

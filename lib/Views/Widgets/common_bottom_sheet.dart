@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,17 +6,19 @@ import 'package:quotez/Controllers/theme_controller.dart';
 class BottomSheetExample extends StatelessWidget {
   final themeController=Get.find<ThemeController>();
   final controller=TextEditingController();
+
+  BottomSheetExample({super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(20.0),
+      decoration: const BoxDecoration(
         gradient:
           LinearGradient(
               colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              stops: const [0.1, 0.9]),
+              stops: [0.1, 0.9]),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20.0),
           topRight: Radius.circular(20.0),
@@ -38,7 +39,7 @@ class BottomSheetExample extends StatelessWidget {
                   .bold, // Adjust the font weight as needed
             ),
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           // TextField(
           //    decoration: InputDecoration(
           //      filled: true,
@@ -63,13 +64,17 @@ class BottomSheetExample extends StatelessWidget {
 
             },
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           RawMaterialButton(
             elevation: 0.0,
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0)
             ),
+            fillColor: const Color(0xFF9365C6),
+            onPressed: () {
+
+            },
             child: Text(
               'Search',
               style: GoogleFonts.inter(
@@ -79,10 +84,6 @@ class BottomSheetExample extends StatelessWidget {
                     : Colors.white,
               ),
             ),
-            fillColor: const Color(0xFF9365C6),
-            onPressed: () {
-
-            },
           ),
         ],
       ),
@@ -172,7 +173,7 @@ class _CommonTextFieldState extends State<CommonTextField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: Colors.white, width: 2),
+          borderSide: const BorderSide(color: Colors.white, width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),

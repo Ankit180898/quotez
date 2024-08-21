@@ -14,11 +14,11 @@ class RandomQuoteModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['author'] = this.author;
-    data['id'] = this.id;
-    data['category'] = this.category;
-    data['text'] = this.text;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['author'] = author;
+    data['id'] = id;
+    data['category'] = category;
+    data['text'] = text;
     return data;
   }
 }

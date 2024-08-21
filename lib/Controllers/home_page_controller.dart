@@ -94,8 +94,8 @@ fetchDataFromDatabase();
           context: Get.context!,
           builder: (context) {
             return SimpleDialog(
-              title: Text("Error"),
-              contentPadding: EdgeInsets.all(20),
+              title: const Text("Error"),
+              contentPadding: const EdgeInsets.all(20),
               children: [Text(error.toString())],
             );
           });

@@ -16,12 +16,12 @@ class StoryListModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['title'] = this.title;
-    data['author'] = this.author;
-    data['story'] = this.story;
-    data['moral'] = this.moral;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['title'] = title;
+    data['author'] = author;
+    data['story'] = story;
+    data['moral'] = moral;
     return data;
   }
 }

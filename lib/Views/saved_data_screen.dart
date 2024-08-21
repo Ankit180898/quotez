@@ -36,17 +36,17 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
           elevation: 0,
           flexibleSpace:Container(
             decoration:  BoxDecoration(
-                color: themeController.isDarkMode.isFalse?Color(0xFF4051A9):Colors.black12
+                color: themeController.isDarkMode.isFalse?const Color(0xFF4051A9):Colors.black12
             ),
           ),
         ),
         body: Container(
             decoration: BoxDecoration(
-              gradient:themeController.isDarkMode.isFalse? LinearGradient(
+              gradient:themeController.isDarkMode.isFalse? const LinearGradient(
                   colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  stops: const [0.1, 0.9]):null,
+                  stops: [0.1, 0.9]):null,
               color: themeController.isDarkMode.isTrue?Colors.black12:null,
             ),
 
@@ -57,7 +57,7 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.network("https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"),
-                      SizedBox(height: 30,),
+                      const SizedBox(height: 30,),
                       Text("No items to show",style:GoogleFonts.poppins(fontSize: 20,color: Colors.white),)
                     ],
                   ),
@@ -77,14 +77,14 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                         children: [
                           InkWell(
                             onTap: (){
-                              Get.to(QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
+                              Get.to(const QuoteDisplayScreen(),arguments: [{"first": item.author.toString()},
                                 {"second": item.text.toString()},
                                 {"third": item.category.toString()}
                               ]
                               );
                             },
                             child: Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   color: Colors.amber,
                                   borderRadius: BorderRadius.all(
                                       Radius.circular(15))
@@ -102,7 +102,7 @@ class _SavedDataScreenState extends State<SavedDataScreen> {
                               onTap: (){
                                 controller.removeItemFromDatabase(item.author.toString());
                               },
-                              child: Icon(
+                              child: const Icon(
                                 Icons.close,
                               ),
                             ),

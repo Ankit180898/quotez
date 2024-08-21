@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +17,8 @@ import 'package:path_provider/path_provider.dart';
 import 'Widgets/common_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -58,14 +58,14 @@ class _HomePageState extends State<HomePage> {
             flexibleSpace: Container(
               decoration: BoxDecoration(
                   color: themeController.isDarkMode.isFalse
-                      ? Color(0xFF4051A9)
+                      ? const Color(0xFF4051A9)
                       : Colors.black12),
             ),
             actions: [
               IconButton(
                 icon: themeController.isDarkMode.isTrue
-                    ? Icon(Icons.light_mode)
-                    : Icon(Icons.dark_mode),
+                    ? const Icon(Icons.light_mode)
+                    : const Icon(Icons.dark_mode),
                 onPressed: () {
                   themeController.toggleTheme();
                 },
@@ -78,11 +78,11 @@ class _HomePageState extends State<HomePage> {
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   gradient: themeController.isDarkMode.isFalse
-                      ? LinearGradient(
+                      ? const LinearGradient(
                           colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          stops: const [0.1, 0.9])
+                          stops:  [0.1, 0.9])
                       : null,
                   color:
                       themeController.isDarkMode.isTrue ? Colors.black12 : null,
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                                     MediaQuery.of(context).size.height * 0.60,
                                 autoplay: false,
                                 loop: false,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 itemCount: controller.randomQuoteList.length,
                                 layout: SwiperLayout.TINDER,
                                 itemBuilder: (context, index) {
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                   return InkWell(
                                     onTap: () {
                                       print("item: ${item.text}");
-                                      Get.to(QuoteDisplayScreen(), arguments: [
+                                      Get.to(const QuoteDisplayScreen(), arguments: [
                                         {"first": item.author.toString()},
                                         {"second": item.text.toString()},
                                         {"third": item.category.toString()}
@@ -207,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                                             color: Colors.grey.withOpacity(0.5),
                                             spreadRadius: 2,
                                             blurRadius: 5,
-                                            offset: Offset(0,
+                                            offset: const Offset(0,
                                                 3), // changes position of shadow
                                           ),
                                         ],
@@ -245,7 +245,7 @@ class _HomePageState extends State<HomePage> {
                                                 )
                                               ],
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             Wrap(
                                               crossAxisAlignment:
                                                   WrapCrossAlignment.center,
@@ -254,13 +254,13 @@ class _HomePageState extends State<HomePage> {
                                                   alignment: Alignment.center,
                                                   transform: Matrix4.rotationY(
                                                       math.pi),
-                                                  child: Icon(
+                                                  child: const Icon(
                                                     Icons.format_quote,
                                                     color: Colors.amber,
                                                     size: 30,
                                                   ),
                                                 ),
-                                                SizedBox(width: 5),
+                                                const SizedBox(width: 5),
                                                 Text(
                                                   "${controller.randomQuoteList[index].text}",
                                                   textAlign: TextAlign.center,
@@ -276,8 +276,8 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                   maxLines: 3,
                                                 ),
-                                                SizedBox(width: 5),
-                                                Align(
+                                                const SizedBox(width: 5),
+                                                const Align(
                                                   alignment:
                                                       Alignment.bottomRight,
                                                   child: Icon(
@@ -305,14 +305,14 @@ class _HomePageState extends State<HomePage> {
                                             //   ),
                                             //   maxLines: 5,
                                             // ),
-                                            Spacer(),
-                                            Divider(
+                                            const Spacer(),
+                                            const Divider(
                                               color: Colors.grey,
                                               thickness: 5,
                                               indent: 100,
                                               endIndent: 100,
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
 
                                             Center(
                                               child: Text(
@@ -323,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                                                           FontWeight.bold,
                                                       color: Colors.blueGrey)),
                                             ),
-                                            Spacer(),
+                                            const Spacer(),
                                             IconButton(
                                               onPressed: () {
                                                 // Save the selected item to the database
@@ -333,7 +333,7 @@ class _HomePageState extends State<HomePage> {
                                                 Get.snackbar('Success',
                                                     'Item saved to database.');
                                               },
-                                              icon: Icon(Icons.bookmark),
+                                              icon: const Icon(Icons.bookmark),
                                               iconSize: 40,
                                               color: themeController
                                                       .isDarkMode.isFalse
@@ -341,7 +341,7 @@ class _HomePageState extends State<HomePage> {
                                                   : Colors.black,
                                             ),
 
-                                            Spacer(),
+                                            const Spacer(),
                                           ],
                                         ),
                                       ),
@@ -361,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                                       ? Colors.amber
                                       : Colors.blueGrey,
                                 )
-                              : SizedBox()),
+                              : const SizedBox()),
                     ],
                   ),
                 ),

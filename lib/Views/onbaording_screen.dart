@@ -15,9 +15,9 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   final List<Color> colorList=[
-    Color(0xffFFC3A6),
-    Color(0xFFFFFF),
-    Color(0xffFFC3A6),
+    const Color(0xffFFC3A6),
+    const Color(0x00ffffff),
+    const Color(0xffFFC3A6),
 
   ];
 
@@ -31,12 +31,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffd7f2f2),
-      body: Container(
+      backgroundColor: const Color(0xffd7f2f2),
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             CarouselSlider(
 
 
@@ -46,50 +46,50 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 autoPlay: true,
               ),
               items: imageList
-                  .map((e) => FadeInRight(duration: Duration(milliseconds: 1500),child: Image.network(e,fit: BoxFit.cover,)),
+                  .map((e) => FadeInRight(duration: const Duration(milliseconds: 1500),child: Image.network(e,fit: BoxFit.cover,)),
               )
                   .toList(),
             ),
-            Spacer(),
+            const Spacer(),
             FadeInUp(
-              duration: Duration(milliseconds: 1000),
-              delay: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 1000),
+              delay: const Duration(milliseconds: 500),
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.30,
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topRight: Radius.circular(60),topLeft:Radius.circular(60) )
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     FadeInUp(
-                      duration: Duration(milliseconds: 1000),
-                      delay: Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 1000),
+                      delay: const Duration(milliseconds: 1000),
                       child: Text("📖 Discover Wisdom:",
                       style: GoogleFonts.poppins(color: Colors.black,fontSize: 24,fontWeight: FontWeight.bold),
                       ),
                     ),
 
                     FadeInUp(
-                      duration: Duration(milliseconds: 1000),
-                      delay: Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 1000),
+                      delay: const Duration(milliseconds: 1000),
                       child: Text("Let these words of wisdom motivate \nand empower you on your journey.",
                         style: GoogleFonts.openSans(color: Colors.grey.shade600,fontSize: 14,),
                       ),
                     ),
                     FadeInUp(
-                      duration: Duration(milliseconds: 1000),
-                      delay: Duration(milliseconds: 1000),
+                      duration: const Duration(milliseconds: 1000),
+                      delay: const Duration(milliseconds: 1000),
                       child: Align(alignment: Alignment.bottomRight,child: TextButton(onPressed: (){
-                        Get.offAll(BottomNav());
+                        Get.offAll(const BottomNav());
                         // Get.offAll(KhushiScreen());
                       }, child: Text("EXPLORE NOW",style:GoogleFonts.poppins(color: Colors.black,fontSize: 17,fontWeight: FontWeight.bold),))),
                     ),
-                    Spacer(),
+                    const Spacer(),
 
                   ],
                 ),
