@@ -13,14 +13,11 @@
   Users can now enjoy reading inspiring quotes even in low-light environments.
 
 ## Screenshots
-
-  ![2](https://github.com/Ankit180898/quotez/assets/48925155/684dcb53-121b-4b69-b798-6898401aef81)
-  ![1](https://github.com/Ankit180898/quotez/assets/48925155/dc9391df-ad2c-4053-9141-9f96ea0c88d2)
-
-  ![4](https://github.com/Ankit180898/quotez/assets/48925155/7848d6e3-937f-4757-9144-c8386a2e6f66)
-  ![3](https://github.com/Ankit180898/quotez/assets/48925155/83a32666-7553-4405-a4b5-97880c583e68)
-
-  
+   <img src ="https://github.com/Ankit180898/quotez/assets/48925155/684dcb53-121b-4b69-b798-6898401aef81" width="150" height="350">
+   <img src ="https://github.com/Ankit180898/quotez/assets/48925155/dc9391df-ad2c-4053-9141-9f96ea0c88d2" width="150" height="350">
+   <img src ="https://github.com/Ankit180898/quotez/assets/48925155/7848d6e3-937f-4757-9144-c8386a2e6f66" width="150" height="350">
+   <img src ="https://github.com/Ankit180898/quotez/assets/48925155/83a32666-7553-4405-a4b5-97880c583e68" width="150" height="350"> 
+   
 ## Purpose
   Why I Built this App:
   The main purpose of it is to have a quote at an instance without any hindrance. 
