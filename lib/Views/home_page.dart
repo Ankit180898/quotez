@@ -26,7 +26,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -40,7 +39,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Obx(
         () => Scaffold(
@@ -178,7 +176,6 @@ class _HomePageState extends State<HomePage> {
                                   MediaQuery.of(context).size.height * 0.60,
                               autoplay: false,
                               loop: true,
-                              
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: controller.randomQuoteList.length,
                               layout: SwiperLayout.TINDER,
@@ -390,5 +387,4 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
-
 }
