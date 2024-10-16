@@ -29,35 +29,28 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animate_do: null
+  card_swiper: null
+  carousel_slider: null
+  connectivity_plus: null
+  cupertino_icons: ^1.0.2
+  flip_card: null
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-
-  get:
-  http:
-  flutter_dotenv:
-  share:
-  google_fonts:
-  card_swiper:
-  connectivity_plus:
-  sqflite:
-  path:
-  flutter_staggered_grid_view:
-  animate_do:
-  carousel_slider:
-  home_widget:
-  flutter_tts:
-  screenshot:
-  flip_card:
-
+  flutter_card_swiper: ^7.0.2
+  flutter_dotenv: null
+  flutter_staggered_grid_view: null
+  flutter_tts: null
+  get: null
+  google_fonts: null
+  home_widget: null
+  http: null
+  path: null
   path_provider: any
+  screenshot: null
+  share: null
+  sqflite: null
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -65,10 +58,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -80,13 +74,10 @@ flutter:
   assets:
     - .env
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

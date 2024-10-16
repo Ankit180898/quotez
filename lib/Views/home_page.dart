@@ -1,390 +1,144 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:quotez/Controllers/home_page_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quotez/Models/random_quote_model.dart';
 import 'package:quotez/Views/quote_display_screen.dart';
-import 'package:share/share.dart';
-import 'package:card_swiper/card_swiper.dart';
-import 'dart:math' as math;
-import 'dart:ui' as ui;
 import '../Controllers/theme_controller.dart';
-import 'Widgets/categories_widget.dart'; // import this
-import 'package:path_provider/path_provider.dart';
+// import this
 
-import 'Widgets/common_bottom_sheet.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  var controller = Get.put(HomePageController());
-  var themeController = Get.find<ThemeController>();
-  GlobalKey previewContainer = GlobalKey();
-
-  int current = 0;
-
-  var textEditingController = TextEditingController();
+  final HomePageController controller = Get.put(HomePageController());
+  final ThemeController themeController = Get.find<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Obx(
-        () => Scaffold(
-          appBar: AppBar(
-            title: Text(
-              "Quotez",
-              style: GoogleFonts.inter(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            elevation: 0,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  color: themeController.isDarkMode.isFalse
-                      ? const Color(0xFF4051A9)
-                      : Colors.black12),
-            ),
-            actions: [
-              IconButton(
-                icon: themeController.isDarkMode.isTrue
-                    ? const Icon(Icons.light_mode)
-                    : const Icon(Icons.dark_mode),
-                onPressed: () {
-                  themeController.toggleTheme();
-                },
-              )
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Quotez",
+          style: GoogleFonts.inter(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            // color: Colors.white,
           ),
-          body: Obx(
-            () => SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                decoration: BoxDecoration(
-                  gradient: themeController.isDarkMode.isFalse
-                      ? const LinearGradient(
-                          colors: [Color(0xFF4051A9), Color(0xFF9354B9)],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          stops: [0.1, 0.9])
-                      : null,
-                  color:
-                      themeController.isDarkMode.isTrue ? Colors.black12 : null,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return CategoryListWidget(
-                                        categories: controller.tabsData);
-                                  },
-                                );
-                              },
-                              icon: Icon(
-                                Icons.filter_list_rounded,
-                                color: themeController.isDarkMode.isFalse
-                                    ? Colors.white
-                                    : Colors.white,
-                                size: 25,
-                              )),
-                          IconButton(
-                            onPressed: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-                                builder: (context) => SingleChildScrollView(
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom),
-                                    child: BottomSheetExample(),
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.search_rounded,
-                              color: themeController.isDarkMode.isFalse
-                                  ? Colors.white
-                                  : Colors.white,
-                              size: 25,
-                            ),
-                          ),
-                          // Obx(()=>
-                          //     FloatingActionButton(
-                          //       autofocus: false,
-                          //       backgroundColor: themeController.isDarkMode.isFalse
-                          //           ? const Color(0xFF9365C6).withOpacity(0.9)
-                          //           : Colors.blueGrey,
-                          //       elevation: 6,
-                          //       onPressed: () {
-                          //         showModalBottomSheet(
-                          //           context: context,
-                          //           isScrollControlled: true,
-                          //           builder: (context) => SingleChildScrollView(
-                          //             child: Container(
-                          //               padding: EdgeInsets.only(
-                          //                   bottom: MediaQuery.of(context)
-                          //                       .viewInsets
-                          //                       .bottom),
-                          //               child: BottomSheetExample(),
-                          //             ),
-                          //           ),
-                          //         );
-                          //       },
-                          //       child: Icon(
-                          //         Icons.search_rounded,
-                          //         color: themeController.isDarkMode.isFalse
-                          //             ? Colors.white
-                          //             : Colors.white,
-                          //         size: 25,
-                          //       ),
-                          //     ),
-                          // ),
-                        ],
-                      ),
-                      // CategoryListWidget(categories: controller.tabsData),
-                      Stack(
-                        children: [
-                          RepaintBoundary(
-                            key: previewContainer,
-                            child: Swiper(
-                              itemWidth: MediaQuery.of(context).size.width,
-                              itemHeight:
-                                  MediaQuery.of(context).size.height * 0.60,
-                              autoplay: false,
-                              loop: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: controller.randomQuoteList.length,
-                              layout: SwiperLayout.TINDER,
-                              itemBuilder: (context, index) {
-                                final item = controller.randomQuoteList[index];
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(themeController.isDarkMode.value ? Icons.light_mode : Icons.dark_mode),
+            onPressed: themeController.toggleTheme,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          _buildSearchBar(),
+          _buildCategories(),
+          Expanded(child: _buildQuotesList()),
+        ],
+      ),
+    );
+  }
 
-                                return InkWell(
-                                  onTap: () {
-                                    debugPrint("item: ${item.text}");
-                                    Get.to(const QuoteDisplayScreen(),
-                                        arguments: [
-                                          {"first": item.author.toString()},
-                                          {"second": item.text.toString()},
-                                          {"third": item.category.toString()}
-                                        ]);
-                                  },
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.30,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Quotes",
-                                                style: GoogleFonts.inter(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: themeController
-                                                            .isDarkMode.isFalse
-                                                        ? Colors.black
-                                                        : Colors.black),
-                                              ),
-                                              IconButton(
-                                                onPressed: () {
-                                                  _captureSocialPng(
-                                                      item.author.toString());
-                                                  // Share.share("${controller.randomQuoteList[index].text}");
-                                                },
-                                                icon: const Icon(Icons.share),
-                                                color: Colors.red,
-                                              )
-                                            ],
-                                          ),
-                                          const Spacer(),
-                                          Wrap(
-                                            crossAxisAlignment:
-                                                WrapCrossAlignment.center,
-                                            children: [
-                                              Transform(
-                                                alignment: Alignment.center,
-                                                transform:
-                                                    Matrix4.rotationY(math.pi),
-                                                child: const Icon(
-                                                  Icons.format_quote,
-                                                  color: Colors.amber,
-                                                  size: 30,
-                                                ),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                "${controller.randomQuoteList[index].text}",
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.spaceMono(
-                                                  fontSize: 25.0,
-                                                  color: themeController
-                                                          .isDarkMode.isFalse
-                                                      ? Colors.black
-                                                      : Colors.black,
-                                                  // Adjust the font size as needed
-                                                  fontWeight: FontWeight
-                                                      .bold, // Adjust the font weight as needed
-                                                ),
-                                                maxLines: 3,
-                                              ),
-                                              const SizedBox(width: 5),
-                                              const Align(
-                                                alignment:
-                                                    Alignment.bottomRight,
-                                                child: Icon(
-                                                  Icons.format_quote,
-                                                  color: Colors.amber,
-                                                  size: 30,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          // Text(
-                                          //   "${controller.randomQuoteList[index].text}",
-                                          //   textAlign: TextAlign.center,
-                                          //   style:GoogleFonts.poppins(
-                                          //     fontSize: 25.0,
-                                          //     // Adjust the font size as needed
-                                          //     fontWeight: FontWeight.bold, // Adjust the font weight as needed
-                                          //   ),
-                                          //   maxLines: 5,
-                                          //   ),
-                                          //   style: TextStyle(
-                                          //     fontSize: 40.0,
-                                          //     // Adjust the font size as needed
-                                          //     fontWeight: FontWeight.bold, // Adjust the font weight as needed
-                                          //   ),
-                                          //   maxLines: 5,
-                                          // ),
-                                          const Spacer(),
-                                          const Divider(
-                                            color: Colors.grey,
-                                            thickness: 5,
-                                            indent: 100,
-                                            endIndent: 100,
-                                          ),
-                                          const Spacer(),
-
-                                          Center(
-                                            child: Text(
-                                                "${controller.randomQuoteList[index].author}",
-                                                style: GoogleFonts.openSans(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.blueGrey)),
-                                          ),
-                                          const Spacer(),
-                                          IconButton(
-                                            onPressed: () {
-                                              // Save the selected item to the database
-                                              controller
-                                                  .saveItemToDatabase(item);
-                                              // Show a message or trigger any other action after saving
-                                              Get.snackbar('Success',
-                                                  'Item saved to database.');
-                                            },
-                                            icon: const Icon(Icons.bookmark),
-                                            iconSize: 40,
-                                            color: themeController
-                                                    .isDarkMode.isFalse
-                                                ? Colors.black
-                                                : Colors.black,
-                                          ),
-
-                                          const Spacer(),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      Align(
-                          alignment: Alignment.center,
-                          child: controller.isLoading.value == true
-                              ? CircularProgressIndicator(
-                                  color: themeController.isDarkMode.isTrue
-                                      ? Colors.amber
-                                      : Colors.blueGrey,
-                                )
-                              : const SizedBox()),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextField(
+        onChanged: controller.filterQuotes,
+        decoration: InputDecoration(
+          hintText: 'Search quotes...',
+          prefixIcon: const Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),
     );
   }
 
-  Future<void> _captureSocialPng(String name) {
-    List<String> imagePaths = [];
-    final RenderBox box = context.findRenderObject() as RenderBox;
-    return Future.delayed(const Duration(milliseconds: 20), () async {
-      RenderRepaintBoundary? boundary = previewContainer.currentContext!
-          .findRenderObject() as RenderRepaintBoundary?;
-      ui.Image image = await boundary!.toImage(pixelRatio: 3.0);
-      final directory = (await getApplicationDocumentsDirectory());
-      final String path = directory.path;
-      ByteData? byteData =
-          await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List pngBytes = byteData!.buffer.asUint8List();
-      File imgFile = File('$path/$name.png');
-      imagePaths.add(imgFile.path);
-      imgFile.writeAsBytes(pngBytes).then((value) async {
-        await Share.shareFiles(imagePaths,
-            subject: 'Share',
-            text: 'Check this Out!',
-            sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
-      }).catchError((onError) {
-        debugPrint(onError);
-      });
+  Widget _buildCategories() {
+    return SizedBox(
+      height: 50,
+      child: Obx(() => ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: controller.tabsData.length,
+        itemBuilder: (context, index) {
+          final category = controller.tabsData[index];
+          return Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Obx(() => ChoiceChip(
+              label: Text(category),
+              selected: controller.isCategorySelected(category),
+              onSelected: (selected) {
+                controller.toggleCategory(category);
+              },
+            )),
+          );
+        },
+      )),
+    );
+  }
+
+  Widget _buildQuotesList() {
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (controller.filteredQuotes.isEmpty) {
+        return const Center(child: Text('No quotes found'));
+      }
+      return ListView.builder(
+        itemCount: controller.filteredQuotes.length,
+        itemBuilder: (context, index) {
+          final RandomQuoteModel quote = controller.filteredQuotes[index];
+          return Card(
+            elevation: 0,
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(12),
+              leading: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  double size = constraints.maxHeight * 0.8; // 80% of the ListTile height
+                  return Container(
+                    width: size,
+                    height: size,
+                    decoration: BoxDecoration(
+                      color: Colors.amberAccent,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Center(
+                      child: Icon(
+                        Icons.format_quote,
+                        color: Colors.black,
+                        size: 24,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              title: Text(
+                quote.text ?? '',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(quote.author ?? ''),
+              onTap: () => Get.to(() => const QuoteDisplayScreen(), arguments: [
+                {"first": quote.author},
+                {"second": quote.text},
+                {"third": quote.category},
+              ]),
+              trailing: IconButton(
+                icon: const Icon(Icons.bookmark_border),
+                onPressed: () => controller.saveItemToDatabase(quote),
+              ),
+            ),
+          );
+        },
+      );
     });
   }
 }

@@ -3,7 +3,7 @@ class Item {
   final String author;
   final String category;
 
-  Item({required this.text,required this.author,required this.category});
+  Item({required this.text,required this.author,required this.category, int? id});
   Map<String, dynamic> toMap() {
     return {
       'text': text,

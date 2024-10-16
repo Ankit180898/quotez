@@ -49,18 +49,18 @@ class _CardWidgetState extends State<CardWidget> {
             Container(
               margin: const EdgeInsets.only(bottom: 15),
               color: Colors.teal,
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Card(
                     color: Colors.white,
                     elevation: 6,
                     child: Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: EdgeInsets.all(15),
                       child: Column(
                         children: [
                           
-                          const Text('')
+                          Text('')
                         ],
                       ),
                     ),
