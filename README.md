@@ -13,9 +13,10 @@
   Users can now enjoy reading inspiring quotes even in low-light environments.
 
 ## Screenshots
-   <img src ="https://github.com/user-attachments/assets/87d3ac3e-d55c-4700-9759-9f32c2ef5916" width="150" height="350">
    <img src ="https://github.com/user-attachments/assets/d00d1b4a-f96a-4403-a603-7096a6cc29c5" width="150" height="350">
    <img src ="https://github.com/user-attachments/assets/13f208ac-17bb-4453-8e82-94a769dd7f8f" width="150" height="350">
+   <img src ="https://github.com/user-attachments/assets/87d3ac3e-d55c-4700-9759-9f32c2ef5916" width="150" height="350">
+
    
 ## Purpose
   Why I Built this App:
