@@ -98,7 +98,7 @@ class _QuoteDisplayScreenState extends State<QuoteDisplayScreen> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.format_quote,
                               size: 40,
                               color: Colors.amberAccent,
